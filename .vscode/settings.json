@@ -1,0 +1,21 @@
+{
+  "editor.formatOnSave": true,
+  "editor.tabSize": 2,
+  "files.eol": "\n",
+
+  // Use the workspace TypeScript so the @/ path alias resolves in the editor.
+  "typescript.tsdk": "node_modules/typescript/lib",
+  "typescript.enablePromptUseWorkspaceTsdk": true,
+
+  // Tailwind 4 keeps its config in CSS; these stop the CSS linter from
+  // flagging @theme and @apply as unknown at-rules.
+  "css.lint.unknownAtRules": "ignore",
+  "tailwindCSS.experimental.configFile": "src/index.css",
+
+  "search.exclude": {
+    "**/node_modules": true,
+    "**/dist": true,
+    "**/ios": true,
+    "**/android": true
+  }
+}
