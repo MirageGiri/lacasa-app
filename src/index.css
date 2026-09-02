@@ -1,0 +1,74 @@
+@import "tailwindcss";
+
+/* ---------------------------------------------------------------------------
+   LA CASA design tokens.
+   Brand magenta carried over from the Glide prototype, darkened to #C2185B so
+   body text and buttons clear WCAG AA on white (5.9:1 rather than 3.4:1).
+   Type scale runs large by default: the audience includes parents reading on
+   small phones, often in a second language.
+--------------------------------------------------------------------------- */
+@theme {
+  --color-brand-50:  #FDF2F7;
+  --color-brand-100: #FCE7F1;
+  --color-brand-200: #FBCFE3;
+  --color-brand-300: #F9A8CC;
+  --color-brand-400: #F472AE;
+  --color-brand-500: #E0218A;
+  --color-brand-600: #C2185B;
+  --color-brand-700: #9D174D;
+  --color-brand-800: #831843;
+  --color-brand-900: #6B1338;
+
+  --color-leaf-500: #2E9E5B;
+  --color-leaf-600: #1F7A44;
+  --color-sun-500:  #F0A202;
+  --color-sky-500:  #0284C7;
+
+  --color-ink:      #1A1220;
+  --color-ink-soft: #574C60;
+  --color-line:     #EAE3EE;
+  --color-surface:  #FFFFFF;
+  --color-canvas:   #FBF8FC;
+
+  --font-sans: "Nunito", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --radius-card: 1.25rem;
+}
+
+:root { color-scheme: light; }
+
+html, body, #root { height: 100%; }
+
+body {
+  margin: 0;
+  background: var(--color-canvas);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  font-size: 17px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  /* Native shells: keep content clear of the notch and home indicator. */
+  padding-top: env(safe-area-inset-top);
+}
+
+/* Never let a long Spanish compound word break the layout on a small phone. */
+h1, h2, h3, p, li { overflow-wrap: break-word; hyphens: auto; }
+
+/* Visible focus for keyboard and switch-control users. */
+:focus-visible {
+  outline: 3px solid var(--color-brand-500);
+  outline-offset: 2px;
+  border-radius: 6px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+.card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-card);
+}
