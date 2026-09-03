@@ -56,7 +56,8 @@ src/content/     the curriculum — 7 modules, 29 lessons, quizzes, goals
 src/i18n/        language context + interface strings
 src/state/       progress, goals, quiz results
 src/lib/         supabase client, storage, chat provider interface
-src/screens/     Home, ModuleDetail, ItemDetail, Quiz, Goals, Ask, Profile
+src/screens/     Welcome, Home, ModuleDetail, ItemDetail, Quiz, Goals, Ask,
+                 Storybook, StoryReader, Profile
 supabase/        SQL migration with row-level security
 ```
 
@@ -74,6 +75,19 @@ isn't. Search that flag to find them.
 **Every Spanish string is a draft awaiting clinical review.** While
 `SHOW_DRAFT_BADGES` is true in `src/components/ui.tsx`, Spanish lessons carry a
 visible reviewer badge. Set it to `false` for the family-facing release.
+
+## Read-aloud narration
+
+`src/lib/speech.ts` narrates storybook pages with the browser's own speech
+synthesis, in whichever language is selected. It works today, offline, on iOS,
+Android and desktop — so the reader ships with narration rather than waiting on
+a recording session. Recorded narration by a native speaker is better and
+should replace it: swap the `speak`/`stop` implementation and no screen changes.
+
+The stories in `src/content/stories.ts` are placeholder text written to hold the
+layout, and the illustrations in `src/components/StoryArt.tsx` are SVG
+placeholders. Both should be replaced by the LA CASA team's own story and
+commissioned art before this reaches families.
 
 ## The chat assistant
 

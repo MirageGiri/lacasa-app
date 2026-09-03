@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
-import { modules, itemsByModule } from '@/content'
+import { modules, itemsByModule, stories } from '@/content'
+import StoryArt from '@/components/StoryArt'
 import { useLang } from '@/i18n/LanguageContext'
 import { useProgress } from '@/state/ProgressContext'
 import { ProgressBar, Screen, accent } from '@/components/ui'
@@ -68,6 +69,26 @@ export default function Home() {
           )
         })}
       </div>
+
+      <Link
+        to="/stories"
+        className="card mt-3 flex items-center gap-3 overflow-hidden py-0 pr-4 transition hover:shadow-md"
+      >
+        <span className="h-[76px] w-[92px] shrink-0 overflow-hidden bg-[#FDEBC8]">
+          <StoryArt name="garden" />
+        </span>
+        <span className="min-w-0 flex-1 py-3">
+          <span className="block text-lg font-extrabold leading-snug">{t('storiesTitle')}</span>
+          <span className="block text-sm text-ink-soft">{t('storiesBlurb')}</span>
+        </span>
+        <span aria-hidden className="shrink-0 text-xl text-brand-500">
+          →
+        </span>
+      </Link>
+
+      <p className="mt-2 text-center text-xs font-bold text-ink-soft">
+        {stories.length} {t('storiesTitle').toLowerCase()}
+      </p>
     </Screen>
   )
 }

@@ -26,3 +26,16 @@ sync and for building the iOS/Android apps.
 | Buttons, tabs, labels | `src/i18n/strings.ts` |
 | Colors and type | `src/index.css` |
 | A screen's layout | `src/screens/` |
+| The storybook stories | `src/content/stories.ts` |
+| Storybook illustrations | `src/components/StoryArt.tsx` |
+| Tab bar / icons | `src/components/icons.tsx` |
+| The welcome + language screen | `src/screens/Welcome.tsx` |
+
+## Seeing the welcome screen again
+
+It only shows on first launch. To get it back, run this in the browser console
+and reload:
+
+```js
+localStorage.removeItem('lacasa.welcomed')
+```

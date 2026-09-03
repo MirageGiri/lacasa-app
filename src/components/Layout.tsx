@@ -1,11 +1,12 @@
 import { NavLink, Outlet } from 'react-router-dom'
 import { useLang } from '@/i18n/LanguageContext'
+import { BookIcon, ChatIcon, PersonIcon, TargetIcon } from '@/components/icons'
 
 const tabs = [
-  { to: '/', key: 'navHome', icon: '📚', end: true },
-  { to: '/goals', key: 'navGoals', icon: '🎯', end: false },
-  { to: '/ask', key: 'navAsk', icon: '💬', end: false },
-  { to: '/profile', key: 'navProfile', icon: '👤', end: false },
+  { to: '/', key: 'navHome', Icon: BookIcon, end: true },
+  { to: '/goals', key: 'navGoals', Icon: TargetIcon, end: false },
+  { to: '/ask', key: 'navAsk', Icon: ChatIcon, end: false },
+  { to: '/profile', key: 'navProfile', Icon: PersonIcon, end: false },
 ] as const
 
 export default function Layout() {
@@ -14,14 +15,17 @@ export default function Layout() {
   return (
     <div className="min-h-full">
       <header className="sticky top-0 z-20 border-b border-line bg-brand-600 text-white">
-        <div className="mx-auto flex w-full max-w-2xl items-center justify-between px-4 py-3">
+        <div className="mx-auto flex w-full max-w-2xl items-center justify-between gap-3 px-4 py-3">
           <div className="flex items-center gap-2.5">
-            <span aria-hidden className="grid h-9 w-9 place-items-center rounded-xl bg-white/15 text-lg font-black">
+            <span
+              aria-hidden
+              className="grid h-9 w-9 place-items-center rounded-xl bg-white/15 text-lg font-black"
+            >
               C
             </span>
             <div className="leading-tight">
               <p className="text-base font-extrabold">{t('appName')}</p>
-              <p className="text-[11px] text-white/80">{t('tagline')}</p>
+              <p className="text-[11px] font-semibold text-white/80">{t('tagline')}</p>
             </div>
           </div>
           <button
@@ -42,19 +46,19 @@ export default function Layout() {
         aria-label={t('navHome')}
       >
         <div className="mx-auto flex w-full max-w-2xl">
-          {tabs.map((tab) => (
+          {tabs.map(({ to, key, Icon, end }) => (
             <NavLink
-              key={tab.to}
-              to={tab.to}
-              end={tab.end}
+              key={to}
+              to={to}
+              end={end}
               className={({ isActive }) =>
-                `flex flex-1 flex-col items-center gap-0.5 py-2.5 text-xs font-bold transition ${
+                `flex flex-1 flex-col items-center gap-[3px] py-2.5 text-xs font-extrabold transition ${
                   isActive ? 'text-brand-600' : 'text-ink-soft'
                 }`
               }
             >
-              <span aria-hidden className="text-xl">{tab.icon}</span>
-              {t(tab.key)}
+              <Icon size={24} />
+              {t(key)}
             </NavLink>
           ))}
         </div>

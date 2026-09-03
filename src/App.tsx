@@ -7,15 +7,21 @@ import Quiz from '@/screens/Quiz'
 import Goals from '@/screens/Goals'
 import Ask from '@/screens/Ask'
 import Profile from '@/screens/Profile'
+import Storybook from '@/screens/Storybook'
+import StoryReader from '@/screens/StoryReader'
 
 export default function App() {
   return (
     <Routes>
+      {/* The story reader sits outside Layout on purpose: reading mode has no
+          tab bar and its own warm ground. */}
+      <Route path="story/:storyId" element={<StoryReader />} />
       <Route element={<Layout />}>
         <Route index element={<Home />} />
         <Route path="module/:moduleId" element={<ModuleDetail />} />
         <Route path="module/:moduleId/item/:itemId" element={<ItemDetail />} />
         <Route path="module/:moduleId/quiz" element={<Quiz />} />
+        <Route path="stories" element={<Storybook />} />
         <Route path="goals" element={<Goals />} />
         <Route path="ask" element={<Ask />} />
         <Route path="profile" element={<Profile />} />

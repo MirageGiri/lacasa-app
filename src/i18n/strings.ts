@@ -60,6 +60,31 @@ export const ui = {
   resetProgress:  { en: 'Reset my progress', es: 'Borrar mi progreso' },
   resetConfirm:   { en: 'This clears every lesson, goal and quiz result on this device.', es: 'Esto borra todas las lecciones, metas y resultados en este dispositivo.' },
 
+
+  welcomeChoose:  { en: 'Choose your language · Elija su idioma', es: 'Elija su idioma · Choose your language' },
+  welcomeEmailH:  { en: 'Sign in with your email', es: 'Entre con su correo electrónico' },
+  welcomeEmailP:  { en: 'We send you a link to sign in. No password to remember.', es: 'Le enviamos un enlace para entrar. No necesita recordar ninguna contraseña.' },
+  welcomeSend:    { en: 'Send my link', es: 'Enviar mi enlace' },
+  welcomeSoon:    { en: 'Coming soon', es: 'Próximamente' },
+  welcomeOr:      { en: 'or', es: 'o' },
+  welcomeGuest:   { en: 'Continue without an account', es: 'Entrar sin cuenta' },
+  welcomeGuestP:  { en: 'You can use the whole app without signing up. Your progress is saved on this phone.', es: 'Puede usar toda la aplicación sin registrarse. Su progreso se guarda en este teléfono.' },
+  welcomeFooter:  { en: 'A UAMS program · LA CASA', es: 'Un programa de UAMS · LA CASA' },
+
+  storiesTitle:   { en: 'Storybooks', es: 'Cuentos' },
+  storiesBlurb:   { en: 'Read together, or let the app read aloud.', es: 'Lean juntos, o deje que la aplicación lea en voz alta.' },
+  storyPage:      { en: 'Page', es: 'Página' },
+  storyReadAloud: { en: 'Read aloud', es: 'Leer en voz alta' },
+  storyStop:      { en: 'Stop', es: 'Detener' },
+  storyNoAudio:   { en: 'Read-aloud is not available on this device.', es: 'La lectura en voz alta no está disponible en este dispositivo.' },
+  storyFinish:    { en: 'The end', es: 'Fin' },
+
+  progressTitle:  { en: 'Your progress', es: 'Su progreso' },
+  progressRead:   { en: 'lessons read', es: 'lecciones leídas' },
+  progressMods:   { en: 'modules complete', es: 'módulos completados' },
+  progressByMod:  { en: 'By module', es: 'Por módulo' },
+  progressNoGoal: { en: 'No goal yet', es: 'Todavía sin meta' },
+  settingsTitle:  { en: 'Settings', es: 'Ajustes' },
   draftBadge:     { en: 'Spanish draft — pending review', es: 'Borrador en español — pendiente de revisión' },
   needsCopy:      { en: 'Content coming soon', es: 'Contenido próximamente' },
 } as const
