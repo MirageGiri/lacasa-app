@@ -55,7 +55,8 @@ export default function StoryReader() {
   }
 
   return (
-    <div className="flex min-h-full flex-col bg-[#FFF6EC]">
+    <div className="flex min-h-full justify-center bg-[#FFF6EC] sm:py-6">
+      <div className="flex w-full max-w-md flex-col bg-[#FFF6EC] sm:min-h-0 sm:rounded-[32px] sm:shadow-[var(--shadow-lift)]">
       <header className="flex items-center gap-3 px-4 pb-3 pt-4">
         <button
           onClick={() => navigate('/stories')}
@@ -143,6 +144,7 @@ export default function StoryReader() {
             {isLast ? t('storyFinish') : `${t('next')} →`}
           </button>
         </div>
+      </div>
       </div>
     </div>
   )

@@ -1,4 +1,4 @@
-import { Route, Routes } from 'react-router-dom'
+import { Navigate, Route, Routes } from 'react-router-dom'
 import Layout from '@/components/Layout'
 import Home from '@/screens/Home'
 import ModuleDetail from '@/screens/ModuleDetail'
@@ -25,6 +25,10 @@ export default function App() {
         <Route path="goals" element={<Goals />} />
         <Route path="ask" element={<Ask />} />
         <Route path="profile" element={<Profile />} />
+        {/* Anything unrecognised goes home rather than rendering a blank
+            page — stale bookmarks and mistyped deep links are normal in an
+            installed PWA, and a white screen offers no way out. */}
+        <Route path="*" element={<Navigate to="/" replace />} />
       </Route>
     </Routes>
   )
