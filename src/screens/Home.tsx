@@ -11,12 +11,20 @@ export default function Home() {
 
   return (
     <Screen>
-      <section className="mb-6 rounded-[--radius-card] bg-brand-600 px-5 py-5 text-white">
-        <h1 className="text-2xl font-extrabold leading-tight">{t('greeting')}</h1>
-        <p className="mt-3 text-sm font-semibold text-white/85">
+      <section className="relative mb-6 overflow-hidden rounded-[--radius-card] bg-gradient-to-br from-brand-600 to-brand-800 px-5 py-5 text-white shadow-[var(--shadow-lift)]">
+        <span
+          aria-hidden
+          className="pointer-events-none absolute -right-16 -top-20 h-56 w-56 rounded-full border-[14px] border-white/10"
+        />
+        <span
+          aria-hidden
+          className="pointer-events-none absolute -right-4 top-10 h-28 w-28 rounded-full border-[10px] border-white/10"
+        />
+        <h1 className="relative text-2xl font-extrabold leading-tight">{t('greeting')}</h1>
+        <p className="relative mt-3 text-sm font-semibold text-white/85">
           {overall.modulesDone} {t('ofLabel')} {overall.totalModules} {t('modulesDone')}
         </p>
-        <div className="mt-2 h-2 w-full overflow-hidden rounded-full bg-white/25">
+        <div className="relative mt-2 h-2 w-full overflow-hidden rounded-full bg-white/25">
           <div
             className="h-full rounded-full bg-white transition-all duration-500"
             style={{ width: `${overall.pct}%` }}
@@ -25,7 +33,7 @@ export default function Home() {
         {nextUp && (
           <Link
             to={`/module/${nextUp.moduleId}/item/${nextUp.itemId}`}
-            className="mt-4 inline-block rounded-full bg-white px-4 py-2.5 text-sm font-extrabold text-brand-700"
+            className="relative mt-4 inline-block rounded-full bg-white px-4 py-2.5 text-sm font-extrabold text-brand-700 shadow-[0_6px_18px_-6px_rgb(0_0_0_/_0.35)] transition hover:bg-brand-50"
           >
             {t('continueLabel')} →
           </Link>
@@ -46,7 +54,7 @@ export default function Home() {
               <div className="flex items-start gap-3">
                 <span
                   aria-hidden
-                  className={`grid h-12 w-12 shrink-0 place-items-center rounded-2xl text-2xl ${a.bg}`}
+                  className={`grid h-12 w-12 shrink-0 place-items-center rounded-2xl text-2xl ring-1 ring-inset ring-black/5 ${a.bg}`}
                 >
                   {m.emoji}
                 </span>

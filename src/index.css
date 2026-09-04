@@ -17,16 +17,16 @@
 --------------------------------------------------------------------------- */
 @theme {
   /* Brand — light blue */
-  --color-brand-50:  #F0F7FD;
-  --color-brand-100: #DDEDFA;
-  --color-brand-200: #BEDDF5;
-  --color-brand-300: #93C7EE;
-  --color-brand-400: #5EABE2;
-  --color-brand-500: #2E8FD4;
-  --color-brand-600: #1B6FAE;
-  --color-brand-700: #15578A;
-  --color-brand-800: #114568;
-  --color-brand-900: #0D3450;
+  --color-brand-50:  #F2F8FE;
+  --color-brand-100: #E1F0FC;
+  --color-brand-200: #C3E1F8;
+  --color-brand-300: #97CBF1;
+  --color-brand-400: #63AFE6;
+  --color-brand-500: #3593D8;
+  --color-brand-600: #2278BC;
+  --color-brand-700: #1A5F96;
+  --color-brand-800: #164B75;
+  --color-brand-900: #113A5A;
 
   /* Module accents. Each carries a -100 tint, a -500 mark and an -800 text
      value so a module's color is one decision, not three. */
@@ -54,9 +54,15 @@
   /* Neutrals, cooled to sit under a blue brand rather than fight it. */
   --color-ink:      #10202E;
   --color-ink-soft: #4A6172;
-  --color-line:     #DCE8F2;
+  --color-line:     #DBEAF7;
   --color-surface:  #FFFFFF;
-  --color-canvas:   #F4F9FD;
+  --color-canvas:   #F4FAFF;
+
+  /* Depth. Shadows are blue-tinted rather than grey so cards sit on the
+     ground rather than floating over a different scene. */
+  --shadow-card: 0 1px 2px rgb(16 32 46 / 0.04), 0 10px 26px -14px rgb(34 120 188 / 0.30);
+  --shadow-lift: 0 2px 4px rgb(16 32 46 / 0.05), 0 16px 34px -14px rgb(34 120 188 / 0.42);
+  --shadow-bar:  0 8px 24px -12px rgb(23 74 118 / 0.55);
 
   --font-sans: "Nunito", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
   --radius-card: 1.25rem;
@@ -76,6 +82,23 @@ body {
   -webkit-font-smoothing: antialiased;
   /* Native shells: keep content clear of the notch and home indicator. */
   padding-top: env(safe-area-inset-top);
+}
+
+/* The app is a narrow column. On a phone it fills the screen; on a laptop it
+   leaves wide margins, and a flat fill there reads as unfinished. These very
+   low-saturation washes give the flanks something to be without competing
+   with the content. Fixed, so they never scroll or repaint. */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    radial-gradient(1000px 620px at 8% -8%,  #DCEDFC 0%, transparent 62%),
+    radial-gradient(820px 560px at 94% 4%,   #D6F1F7 0%, transparent 58%),
+    radial-gradient(900px 640px at 50% 112%, #E4F1FE 0%, transparent 60%),
+    var(--color-canvas);
 }
 
 /* Never let a long Spanish compound word break the layout on a small phone. */
@@ -99,4 +122,17 @@ h1, h2, h3, p, li { overflow-wrap: break-word; hyphens: auto; }
   background: var(--color-surface);
   border: 1px solid var(--color-line);
   border-radius: var(--radius-card);
+  box-shadow: var(--shadow-card);
+  transition: box-shadow 200ms ease, transform 200ms ease;
+}
+
+/* Only lift things that actually go somewhere. */
+a.card:hover, button.card:hover {
+  box-shadow: var(--shadow-lift);
+  transform: translateY(-2px);
+}
+a.card:active, button.card:active { transform: translateY(0); }
+
+@media (prefers-reduced-motion: reduce) {
+  .card, a.card:hover, button.card:hover { transform: none; }
 }

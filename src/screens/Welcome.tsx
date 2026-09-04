@@ -7,8 +7,17 @@ export default function Welcome({ onContinue }: { onContinue: () => void }) {
   const { t, lang, setLang } = useLang()
 
   return (
-    <div className="flex min-h-full flex-col bg-brand-600">
-      <div className="flex flex-col items-center gap-4 px-6 pb-10 pt-16 text-center text-white">
+    <div className="flex min-h-full flex-col items-center justify-center sm:py-8">
+      <div className="relative flex w-full max-w-md flex-col overflow-hidden bg-brand-600 sm:min-h-0 sm:rounded-[32px] sm:shadow-[var(--shadow-lift)]">
+      <span
+        aria-hidden
+        className="pointer-events-none absolute -left-16 -top-10 h-56 w-56 rounded-full border-[16px] border-white/10"
+      />
+      <span
+        aria-hidden
+        className="pointer-events-none absolute -right-12 top-16 h-32 w-32 rounded-full bg-brand-800/30"
+      />
+      <div className="relative flex flex-col items-center gap-4 px-6 pb-10 pt-16 text-center text-white">
         <div className="grid h-[76px] w-[76px] place-items-center rounded-3xl bg-white/15 text-4xl font-black">
           C
         </div>
@@ -20,7 +29,7 @@ export default function Welcome({ onContinue }: { onContinue: () => void }) {
         </div>
       </div>
 
-      <div className="flex flex-1 flex-col gap-6 rounded-t-[28px] bg-surface px-6 pb-8 pt-7">
+      <div className="relative flex flex-1 flex-col gap-6 rounded-t-[28px] bg-surface px-6 pb-8 pt-7">
         <section className="flex flex-col gap-2.5">
           <h2 className="text-xs font-extrabold uppercase tracking-wider text-ink-soft">
             {t('welcomeChoose')}
@@ -82,6 +91,7 @@ export default function Welcome({ onContinue }: { onContinue: () => void }) {
         </section>
 
         <p className="mt-auto text-center text-xs text-ink-soft">{t('welcomeFooter')}</p>
+      </div>
       </div>
     </div>
   )
