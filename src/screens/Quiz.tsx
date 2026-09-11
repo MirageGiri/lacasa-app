@@ -1,9 +1,10 @@
 import { useState } from 'react'
-import { Link, useNavigate, useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { moduleById, quizzes } from '@/content'
 import { useLang } from '@/i18n/LanguageContext'
 import { useProgress } from '@/state/ProgressContext'
-import { Screen } from '@/components/ui'
+import { BackLink, Screen } from '@/components/ui'
+import { AwardIcon, CheckIcon, TargetIcon, XIcon } from '@/components/icons'
 
 export default function Quiz() {
   const { moduleId = '' } = useParams()
@@ -50,17 +51,24 @@ export default function Quiz() {
     return (
       <Screen>
         <div className="card px-6 py-8 text-center">
-          <p aria-hidden className="text-5xl">{pct >= 70 ? '🎉' : '💪'}</p>
+          <span
+            aria-hidden
+            className={`mx-auto grid h-20 w-20 place-items-center rounded-full ${
+              pct >= 70 ? 'bg-leaf-100 text-leaf-800' : 'bg-brand-100 text-brand-700'
+            }`}
+          >
+            {pct >= 70 ? <AwardIcon size={40} /> : <TargetIcon size={40} />}
+          </span>
           <p className="mt-4 text-2xl font-extrabold">
             {t('quizScore')} {correct}/{questions.length}
           </p>
           <div className="mt-6 flex flex-col gap-3">
-            <button onClick={restart} className="rounded-full border border-line px-5 py-3 font-bold">
+            <button onClick={restart} className="min-h-12 rounded-full border-2 border-line px-5 py-3 font-bold transition-colors duration-(--duration-fast) hover:border-line-strong">
               {t('quizRetry')}
             </button>
             <button
               onClick={() => navigate(`/module/${moduleId}`)}
-              className="rounded-full bg-brand-600 px-5 py-3 font-bold text-white"
+              className="min-h-12 rounded-full bg-brand-600 px-5 py-3 font-bold text-white transition-colors duration-(--duration-fast) hover:bg-brand-700"
             >
               {t('quizDone')}
             </button>
@@ -72,11 +80,9 @@ export default function Quiz() {
 
   return (
     <Screen>
-      <Link to={`/module/${moduleId}`} className="text-sm font-bold text-brand-600">
-        ← {b(mod.title)}
-      </Link>
+      <BackLink to={`/module/${moduleId}`}>{b(mod.title)}</BackLink>
 
-      <p className="mt-3 text-xs font-bold uppercase tracking-wide text-ink-soft">
+      <p className="mt-2 text-xs font-bold uppercase tracking-wide text-ink-soft">
         {t('quizQuestion')} {index + 1} {t('ofLabel')} {questions.length}
       </p>
       <h1 className="mt-1 text-2xl font-extrabold leading-tight">{b(q.prompt)}</h1>
@@ -91,20 +97,22 @@ export default function Quiz() {
                 ? 'wrong'
                 : 'muted'
           const styles = {
-            idle: 'border-line bg-surface hover:border-brand-300',
-            right: 'border-leaf-500 bg-leaf-100',
-            wrong: 'border-red-400 bg-red-50',
-            muted: 'border-line bg-surface opacity-60',
+            idle: 'border-line bg-surface hover:border-brand-400 hover:bg-brand-50',
+            right: 'border-leaf-600 bg-leaf-100 text-leaf-800',
+            wrong: 'border-danger-400 bg-danger-50 text-danger-600',
+            muted: 'border-line bg-surface text-ink-soft',
           }[state]
           return (
             <button
               key={i}
               onClick={() => choose(i)}
               disabled={answered}
-              className={`rounded-[--radius-card] border-2 px-4 py-3.5 text-left text-[17px] font-semibold transition ${styles}`}
+              className={`flex min-h-13 items-center justify-between gap-3 rounded-card border-2 px-4 py-3.5 text-left text-[17px] font-semibold transition-colors duration-(--duration-fast) disabled:cursor-default ${styles}`}
             >
-              {choice}
-              {answered && i === q.answer && <span aria-hidden className="ml-2">✓</span>}
+              <span>{choice}</span>
+              {/* Right and wrong each get a shape as well as a color. */}
+              {state === 'right' && <CheckIcon size={20} className="shrink-0" />}
+              {state === 'wrong' && <XIcon size={20} className="shrink-0" />}
             </button>
           )
         })}
@@ -118,7 +126,7 @@ export default function Quiz() {
           <p className="mt-1 text-[17px] leading-relaxed text-ink-soft">{b(q.explanation)}</p>
           <button
             onClick={advance}
-            className="mt-4 w-full rounded-full bg-brand-600 px-5 py-3.5 font-extrabold text-white"
+            className="mt-4 min-h-13 w-full rounded-full bg-brand-600 px-5 py-3.5 font-extrabold text-white transition-colors duration-(--duration-fast) hover:bg-brand-700"
           >
             {index + 1 < questions.length ? t('next') : t('quizDone')}
           </button>

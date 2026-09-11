@@ -4,7 +4,7 @@ export const modules: Module[] = [
   {
     id: 'm1',
     order: 1,
-    emoji: '🥗',
+    icon: 'salad',
     accent: 'leaf',
     title: { en: 'Introduction to Healthy Eating', es: 'Introducción a la alimentación saludable' },
     blurb: {
@@ -15,7 +15,7 @@ export const modules: Module[] = [
   {
     id: 'm2',
     order: 2,
-    emoji: '🏭',
+    icon: 'package',
     accent: 'sun',
     title: { en: 'Ultra Processed Foods', es: 'Alimentos ultraprocesados' },
     blurb: {
@@ -26,7 +26,7 @@ export const modules: Module[] = [
   {
     id: 'm3',
     order: 3,
-    emoji: '🍽️',
+    icon: 'utensils',
     accent: 'berry',
     title: { en: 'Food Servings', es: 'Porciones de alimentos' },
     blurb: {
@@ -37,7 +37,7 @@ export const modules: Module[] = [
   {
     id: 'm4',
     order: 4,
-    emoji: '🍎',
+    icon: 'apple',
     accent: 'leaf',
     title: { en: 'Fruits and Vegetables', es: 'Frutas y verduras' },
     blurb: {
@@ -48,7 +48,7 @@ export const modules: Module[] = [
   {
     id: 'm5',
     order: 5,
-    emoji: '🧃',
+    icon: 'cupSoda',
     accent: 'berry',
     title: { en: 'Sugar Smart', es: 'Azúcar inteligente' },
     blurb: {
@@ -59,7 +59,7 @@ export const modules: Module[] = [
   {
     id: 'm6',
     order: 6,
-    emoji: '💧',
+    icon: 'droplet',
     accent: 'aqua',
     title: { en: 'Importance of Hydration', es: 'La importancia de la hidratación' },
     blurb: {
@@ -70,7 +70,7 @@ export const modules: Module[] = [
   {
     id: 'm7',
     order: 7,
-    emoji: '⚽',
+    icon: 'activity',
     accent: 'sun',
     title: { en: 'Physical Activity', es: 'Actividad física' },
     blurb: {

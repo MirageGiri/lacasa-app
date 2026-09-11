@@ -16,9 +16,9 @@ export default function Storybook() {
           <Link
             key={story.id}
             to={`/story/${story.id}`}
-            className="card block overflow-hidden transition hover:shadow-md"
+            className="card block overflow-hidden"
           >
-            <div className="bg-[#FDEBC8]">
+            <div className="bg-paper-art">
               <StoryArt name={story.cover} />
             </div>
             <div className="flex flex-col gap-1.5 px-4 py-4">

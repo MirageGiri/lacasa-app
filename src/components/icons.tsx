@@ -79,3 +79,125 @@ export const ChevronLeftIcon = ({ size = 24, className }: P) => (
     <path d="m15 5-7 7 7 7" />
   </svg>
 )
+
+/* ---------------------------------------------------------------------------
+   Module + control icons, added in the UI UX Pro Max pass. They replace the
+   emoji the modules, goals and quiz used (🥗 🏭 🍽️ 🍎 🧃 💧 ⚽ 🎯 🔥 🎉 💪)
+   and the text glyphs used as controls (× ← → ✓ ▾ ▸). Same 24px grid and
+   2px stroke as the tab icons, so the whole app speaks one icon language.
+   Paths follow the Lucide set (ISC licence).
+--------------------------------------------------------------------------- */
+
+export const SaladIcon = ({ size = 24, className }: P) => (
+  <svg {...base(size)} className={className}>
+    <path d="M7 21h10" />
+    <path d="M12 21a9 9 0 0 0 9-9H3a9 9 0 0 0 9 9Z" />
+    <path d="M11.38 12a2.4 2.4 0 0 1-.4-4.77 2.4 2.4 0 0 1 3.2-2.77 2.4 2.4 0 0 1 3.47-.63 2.4 2.4 0 0 1 3.37 3.37 2.4 2.4 0 0 1-1.1 3.7 2.51 2.51 0 0 1 .03 1.1" />
+    <path d="m13 12 4-4" />
+    <path d="M10.9 7.25A3.99 3.99 0 0 0 4 10c0 .73.2 1.41.54 2" />
+  </svg>
+)
+
+export const PackageIcon = ({ size = 24, className }: P) => (
+  <svg {...base(size)} className={className}>
+    <path d="M11 21.73a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73z" />
+    <path d="M12 22V12" />
+    <path d="m3.3 7 8.7 5 8.7-5" />
+    <path d="m7.5 4.27 9 5.15" />
+  </svg>
+)
+
+export const UtensilsIcon = ({ size = 24, className }: P) => (
+  <svg {...base(size)} className={className}>
+    <path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2" />
+    <path d="M7 2v20" />
+    <path d="M21 15V2a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3Zm0 0v7" />
+  </svg>
+)
+
+export const AppleIcon = ({ size = 24, className }: P) => (
+  <svg {...base(size)} className={className}>
+    <path d="M12 20.94c1.5 0 2.75 1.06 4 1.06 3 0 6-8 6-12.22A4.91 4.91 0 0 0 17 5c-2.22 0-4 1.44-5 2-1-.56-2.78-2-5-2a4.9 4.9 0 0 0-5 4.78C2 14 5 22 8 22c1.25 0 2.5-1.06 4-1.06Z" />
+    <path d="M10 2c1 .5 2 2 2 5" />
+  </svg>
+)
+
+export const CupSodaIcon = ({ size = 24, className }: P) => (
+  <svg {...base(size)} className={className}>
+    <path d="m6 8 1.75 12.28a2 2 0 0 0 2 1.72h4.54a2 2 0 0 0 2-1.72L18 8" />
+    <path d="M5 8h14" />
+    <path d="M7 15a6.47 6.47 0 0 1 5 0 6.47 6.47 0 0 0 5 0" />
+    <path d="m12 8 1-6h2" />
+  </svg>
+)
+
+export const DropletIcon = ({ size = 24, className }: P) => (
+  <svg {...base(size)} className={className}>
+    <path d="M12 22a7 7 0 0 0 7-7c0-2-1-3.9-3-5.5s-3.5-4-4-6.5c-.5 2.5-2 4.9-4 6.5C6 11.1 5 13 5 15a7 7 0 0 0 7 7z" />
+  </svg>
+)
+
+export const ActivityIcon = ({ size = 24, className }: P) => (
+  <svg {...base(size)} className={className}>
+    <path d="M22 12h-4l-3 9L9 3l-3 9H2" />
+  </svg>
+)
+
+export const AwardIcon = ({ size = 24, className }: P) => (
+  <svg {...base(size)} className={className}>
+    <circle cx="12" cy="8" r="6" />
+    <path d="M15.48 12.89 17 22l-5-3-5 3 1.52-9.11" />
+  </svg>
+)
+
+export const XIcon = ({ size = 24, className }: P) => (
+  <svg {...base(size)} className={className} strokeWidth={2.5}>
+    <path d="M18 6 6 18" />
+    <path d="m6 6 12 12" />
+  </svg>
+)
+
+export const PlusIcon = ({ size = 24, className }: P) => (
+  <svg {...base(size)} className={className} strokeWidth={2.5}>
+    <path d="M5 12h14" />
+    <path d="M12 5v14" />
+  </svg>
+)
+
+export const ArrowLeftIcon = ({ size = 24, className }: P) => (
+  <svg {...base(size)} className={className} strokeWidth={2.5}>
+    <path d="m12 19-7-7 7-7" />
+    <path d="M19 12H5" />
+  </svg>
+)
+
+export const ArrowRightIcon = ({ size = 24, className }: P) => (
+  <svg {...base(size)} className={className} strokeWidth={2.5}>
+    <path d="M5 12h14" />
+    <path d="m12 5 7 7-7 7" />
+  </svg>
+)
+
+export const ChevronDownIcon = ({ size = 24, className }: P) => (
+  <svg {...base(size)} className={className} strokeWidth={2.5}>
+    <path d="m6 9 6 6 6-6" />
+  </svg>
+)
+
+/** Module id → icon, so content files name an icon rather than draw one. */
+export const MODULE_ICONS = {
+  salad: SaladIcon,
+  package: PackageIcon,
+  utensils: UtensilsIcon,
+  apple: AppleIcon,
+  cupSoda: CupSodaIcon,
+  droplet: DropletIcon,
+  activity: ActivityIcon,
+} as const
+
+export type ModuleIconName = keyof typeof MODULE_ICONS
+
+export function ModuleIcon({ name, size = 24, className }: P & { name: ModuleIconName }) {
+  const Icon = MODULE_ICONS[name]
+  return <Icon size={size} className={className} />
+}

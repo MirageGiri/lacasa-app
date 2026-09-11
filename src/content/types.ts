@@ -1,3 +1,5 @@
+import type { ModuleIconName } from '@/components/icons'
+
 /** Every human-readable string in the curriculum carries both languages. */
 export interface Bilingual {
   en: string
@@ -53,5 +55,6 @@ export interface Module {
   blurb: Bilingual
   /** Tailwind-ish accent token used for the module's card and header. */
   accent: 'brand' | 'leaf' | 'sun' | 'berry' | 'aqua'
-  emoji: string
+  /** Named SVG icon — emoji render differently on every Android version. */
+  icon: ModuleIconName
 }

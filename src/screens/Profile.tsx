@@ -59,7 +59,7 @@ export default function Profile() {
       <section className="card mt-3 flex flex-col gap-3 px-4 py-4">
         <div className="flex items-center justify-between gap-3">
           <div className="flex items-center gap-2.5">
-            <FlameIcon size={24} className="text-sun-500" />
+            <FlameIcon size={24} className="text-sun-600" />
             <span className="text-[17px] font-extrabold">
               {leadStreak} {t('goalStreak')}
             </span>
@@ -76,15 +76,15 @@ export default function Profile() {
                 <div
                   className={`grid h-[34px] w-full place-items-center rounded-xl ${
                     done
-                      ? 'bg-emerald-100'
+                      ? 'bg-leaf-100'
                       : day.isToday
-                        ? 'border-2 border-dashed border-line bg-surface'
+                        ? 'border-2 border-dashed border-line-strong bg-surface'
                         : 'bg-line'
                   }`}
                 >
                   {done && <CheckIcon size={16} className="text-leaf-600" />}
                 </div>
-                <span className="text-[11px] font-bold text-ink-soft">{day.label}</span>
+                <span className="text-xs font-bold text-ink-soft">{day.label}</span>
               </div>
             )
           })}
@@ -108,7 +108,7 @@ export default function Profile() {
                     {p.read}/{itemsByModule(m.id).length}
                   </span>
                 </div>
-                <ProgressBar pct={p.pct} accent={m.accent} />
+                <ProgressBar pct={p.pct} accent={m.accent} label={b(m.title)} />
               </div>
             )
           })}
@@ -125,10 +125,10 @@ export default function Profile() {
               key={code}
               onClick={() => setLang(code)}
               aria-pressed={lang === code}
-              className={`rounded-full px-4 py-3 font-extrabold transition ${
+              className={`min-h-12 rounded-full px-4 py-3 font-extrabold transition-colors duration-(--duration-fast) ${
                 lang === code
                   ? 'bg-brand-600 text-white'
-                  : 'border border-line bg-surface text-ink-soft'
+                  : 'border-2 border-line bg-surface text-ink-soft hover:border-line-strong'
               }`}
             >
               {code === 'en' ? t('english') : t('spanish')}
@@ -147,28 +147,35 @@ export default function Profile() {
                   reset()
                   setConfirming(false)
                 }}
-                className="flex-1 rounded-full bg-red-600 px-4 py-3 font-extrabold text-white"
+                className="min-h-12 flex-1 rounded-full bg-danger-600 px-4 py-3 font-extrabold text-white"
               >
                 {t('resetProgress')}
               </button>
               <button
                 onClick={() => setConfirming(false)}
-                className="flex-1 rounded-full border border-line px-4 py-3 font-bold"
+                className="min-h-12 flex-1 rounded-full border-2 border-line px-4 py-3 font-bold hover:border-line-strong"
               >
                 {t('previous')}
               </button>
             </div>
           </>
         ) : (
-          <button onClick={() => setConfirming(true)} className="font-bold text-red-600">
+          <button
+            onClick={() => setConfirming(true)}
+            className="-mx-2 min-h-11 rounded-full px-2 font-bold text-danger-600 transition-colors duration-(--duration-fast) hover:bg-danger-50"
+          >
             {t('resetProgress')}
           </button>
         )}
       </section>
 
-      {!isSupabaseConfigured && (
+      {/* Developer note only. It was rendering to everyone: untranslated on a
+          Spanish screen, and telling a parent to "add Supabase keys" — which
+          means nothing to them and reads like something is broken. import.meta.env.DEV
+          is false in any production build, so this now shows on localhost only. */}
+      {import.meta.env.DEV && !isSupabaseConfigured && (
         <p className="mt-4 text-center text-xs text-ink-soft">
-          Running on device storage — add Supabase keys to sync across devices.
+          Dev: running on device storage — add Supabase keys in .env to sync across devices.
         </p>
       )}
     </Screen>

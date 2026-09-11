@@ -52,6 +52,12 @@ knowing before you change things:
 - **Supabase is optional.** With no environment variables the app runs entirely
   on device storage. Set them and sign-in and cross-device sync turn on. The
   schema, with row-level security on every table, is in `supabase/migrations/`.
+- **One design system.** Colors, type, radius and motion are tokens in
+  `src/index.css`; the reasoning behind them is in
+  `design-system/la-casa/MASTER.md`, generated with the
+  [UI UX Pro Max](https://github.com/nextlevelbuilder/ui-ux-pro-max-skill) skill
+  (installed at `.claude/skills/ui-ux-pro-max`) and reconciled with this app.
+  Icons are SVG components in `src/components/icons.tsx` — no emoji as icons.
 - **Store-ready.** Relative asset paths, hash routing, safe-area insets and a
   service worker are all in place so `npx cap add ios` works without touching
   `src/`.
@@ -64,6 +70,7 @@ src/lib/         supabase client, device storage, chat provider, speech
 src/screens/     Welcome, Home, ModuleDetail, ItemDetail, Quiz, Goals,
                  Storybook, StoryReader, Ask, Profile
 supabase/        SQL migration with row-level security
+design-system/   design rules the UI follows (read MASTER.md before UI work)
 ```
 
 `START-HERE.md` maps "I want to change X" to the file that does it.

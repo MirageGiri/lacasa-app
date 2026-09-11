@@ -20,8 +20,8 @@ export default defineConfig({
         short_name: 'LA CASA',
         description:
           'Comunidad, Alimentación, Seguridad y Amor — healthy habits for families.',
-        theme_color: '#1B6FAE',
-        background_color: '#F4F9FD',
+        theme_color: '#2278BC',
+        background_color: '#F4FAFF',
         display: 'standalone',
         orientation: 'portrait',
         start_url: './',

@@ -3,6 +3,7 @@ import { useLang } from '@/i18n/LanguageContext'
 import { chatProvider } from '@/lib/chatProvider'
 import type { ChatMessage } from '@/lib/chatProvider'
 import { Screen } from '@/components/ui'
+import { ChevronDownIcon } from '@/components/icons'
 
 /** Seeded from the prototype's "Ask a Question" table. Once Supabase is on,
  *  this list comes from the `questions` table instead. */
@@ -64,9 +65,12 @@ export default function Ask() {
             <button
               onClick={() => setOpen(open === i ? null : i)}
               aria-expanded={open === i}
-              className="flex w-full items-start gap-3 px-4 py-3.5 text-left"
+              className="flex min-h-13 w-full items-start gap-3 px-4 py-3.5 text-left transition-colors duration-(--duration-fast) hover:bg-brand-50/60"
             >
-              <span aria-hidden className="mt-0.5 text-brand-500">{open === i ? '▾' : '▸'}</span>
+              <ChevronDownIcon
+                size={20}
+                className={`mt-0.5 shrink-0 text-brand-600 transition-transform duration-(--duration-base) ${open === i ? '' : '-rotate-90'}`}
+              />
               <span className="flex-1 font-bold leading-snug">{b(entry.q)}</span>
             </button>
             {open === i && (
@@ -79,7 +83,7 @@ export default function Ask() {
       {sent.length > 0 && (
         <div className="mt-5 grid gap-2">
           {sent.map((m) => (
-            <div key={m.id} className="rounded-[--radius-card] bg-brand-50 px-4 py-3">
+            <div key={m.id} className="rounded-card bg-brand-50 px-4 py-3">
               <p className="font-semibold">{m.text}</p>
               <p className="mt-1 text-sm text-ink-soft">{t('askPending')}</p>
             </div>
@@ -87,21 +91,28 @@ export default function Ask() {
         </div>
       )}
 
-      <form onSubmit={submit} className="mt-5 flex gap-2">
-        <input
-          value={draft}
-          onChange={(e) => setDraft(e.target.value)}
-          placeholder={t('askPlaceholder')}
-          aria-label={t('askPlaceholder')}
-          className="min-w-0 flex-1 rounded-full border border-line bg-surface px-4 py-3 text-[17px]"
-        />
-        <button
-          type="submit"
-          disabled={!draft.trim()}
-          className="rounded-full bg-brand-600 px-5 py-3 font-extrabold text-white disabled:opacity-40"
-        >
-          {t('askSend')}
-        </button>
+      {/* A visible label, not just a placeholder: the placeholder vanishes the
+          moment someone starts typing, taking the instruction with it. */}
+      <form onSubmit={submit} className="mt-6">
+        <label htmlFor="ask-input" className="mb-2 block text-[15px] font-extrabold">
+          {t('askLabel')}
+        </label>
+        <div className="flex gap-2">
+          <input
+            id="ask-input"
+            value={draft}
+            onChange={(e) => setDraft(e.target.value)}
+            placeholder={t('askPlaceholder')}
+            className="min-h-12 min-w-0 flex-1 rounded-full border-2 border-line-strong bg-surface px-4 py-3 text-[17px] placeholder:text-ink-soft focus-visible:border-brand-600"
+          />
+          <button
+            type="submit"
+            disabled={!draft.trim()}
+            className="min-h-12 rounded-full bg-brand-600 px-5 py-3 font-extrabold text-white transition-colors duration-(--duration-fast) hover:bg-brand-700 disabled:cursor-not-allowed disabled:opacity-40"
+          >
+            {t('askSend')}
+          </button>
+        </div>
       </form>
     </Screen>
   )

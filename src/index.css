@@ -14,6 +14,14 @@
 
    Type runs large by default: the audience includes parents reading on small
    phones, often in a second language.
+
+   2026-09 pass with the UI UX Pro Max skill (design-system/la-casa/MASTER.md):
+   - Atkinson Hyperlegible Next replaces Nunito. The skill's healthcare match;
+     designed by the Braille Institute for low-vision and early readers, with
+     distinct letterforms (I/l/1, O/0) and full Spanish accent coverage.
+   - Every accent now has a `-solid` shade that clears 4.5:1 under white text.
+     The -500 marks are for bars and tints only — white on sun-500 was 2.1:1.
+   - Ad-hoc hex values in screens moved here as tokens (paper, danger).
 --------------------------------------------------------------------------- */
 @theme {
   /* Brand — light blue */
@@ -38,6 +46,7 @@
   --color-sun-100:   #FDEECB;
   --color-sun-500:   #F0A202;
   --color-sun-600:   #C77F00;
+  --color-sun-700:   #9C6400;
   --color-sun-800:   #8A5A00;
 
   --color-berry-100: #FBDCEA;
@@ -55,8 +64,27 @@
   --color-ink:      #10202E;
   --color-ink-soft: #4A6172;
   --color-line:     #DBEAF7;
+  /* Form-control boundary. `line` is 1.2:1 on white — fine for dividers, too
+     faint for an input a user has to find. This is 3.2:1 (WCAG non-text). */
+  --color-line-strong: #7893A8;
   --color-surface:  #FFFFFF;
   --color-canvas:   #F4FAFF;
+
+  /* Destructive / wrong-answer. Always paired with an icon or words, never
+     color alone. */
+  --color-danger-50:  #FEF2F2;
+  --color-danger-400: #F87171;
+  --color-danger-600: #B91C1C;
+
+  /* Storybook "paper" — the reading mode's warm ground. Was six raw hex
+     values scattered through StoryReader and Storybook. */
+  --color-paper:       #FFF6EC;
+  --color-paper-art:   #FDEBC8;
+  --color-paper-line:  #F0E0CC;
+  --color-paper-track: #F3E3D0;
+  --color-paper-dot:   #E7D3BB;
+  --color-paper-ink:   #2A1F14;
+  --color-paper-soft:  #7A5A3A;
 
   /* Depth. Shadows are blue-tinted rather than grey so cards sit on the
      ground rather than floating over a different scene. */
@@ -64,8 +92,20 @@
   --shadow-lift: 0 2px 4px rgb(16 32 46 / 0.05), 0 16px 34px -14px rgb(34 120 188 / 0.42);
   --shadow-bar:  0 8px 24px -12px rgb(23 74 118 / 0.55);
 
-  --font-sans: "Nunito", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-sans: "Atkinson Hyperlegible Next", "Atkinson Hyperlegible", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+
+  /* Registering the radius as a theme token is what makes `rounded-card`
+     exist. The old `rounded-[--radius-card]` compiled to the invalid
+     `border-radius: --radius-card` under Tailwind 4, so those surfaces were
+     rendering with square corners. */
   --radius-card: 1.25rem;
+
+  /* Motion. Low-motion system: short, eased, and never looping except for a
+     loading indicator. */
+  --ease-out-soft: cubic-bezier(0.22, 1, 0.36, 1);
+  --duration-fast: 150ms;
+  --duration-base: 220ms;
+  --duration-slow: 420ms;
 }
 
 :root { color-scheme: light; }
@@ -104,6 +144,30 @@ body::before {
 /* Never let a long Spanish compound word break the layout on a small phone. */
 h1, h2, h3, p, li { overflow-wrap: break-word; hyphens: auto; }
 
+/* Tailwind 4's preflight resets buttons to the default arrow cursor. Anything
+   a finger or mouse can activate should say so. */
+button:not(:disabled), [role="button"], summary, label[for], select { cursor: pointer; }
+
+/* Removes the 300ms double-tap-zoom wait on tap in mobile browsers without
+   disabling pinch zoom. */
+a, button, input, textarea, select, label { touch-action: manipulation; }
+
+/* Skip link: hidden until focused, then the first thing a keyboard user sees. */
+.skip-link {
+  position: absolute;
+  left: 0.75rem;
+  top: -4rem;
+  z-index: 50;
+  padding: 0.75rem 1rem;
+  border-radius: 999px;
+  background: var(--color-surface);
+  color: var(--color-brand-700);
+  font-weight: 800;
+  box-shadow: var(--shadow-lift);
+}
+main[tabindex="-1"]:focus { outline: none; }
+.skip-link:focus { top: calc(env(safe-area-inset-top) + 0.75rem); }
+
 /* Visible focus for keyboard and switch-control users. */
 :focus-visible {
   outline: 3px solid var(--color-brand-500);
@@ -123,7 +187,7 @@ h1, h2, h3, p, li { overflow-wrap: break-word; hyphens: auto; }
   border: 1px solid var(--color-line);
   border-radius: var(--radius-card);
   box-shadow: var(--shadow-card);
-  transition: box-shadow 200ms ease, transform 200ms ease;
+  transition: box-shadow var(--duration-base) var(--ease-out-soft), transform var(--duration-base) var(--ease-out-soft);
 }
 
 /* Only lift things that actually go somewhere. */
@@ -136,3 +200,24 @@ a.card:active, button.card:active { transform: translateY(0); }
 @media (prefers-reduced-motion: reduce) {
   .card, a.card:hover, button.card:hover { transform: none; }
 }
+
+/* ---------------------------------------------------------------------------
+   Learning-path motion. Everything here is decorative and everything is
+   disabled by the prefers-reduced-motion rule above.
+
+   The current lesson used to bob and pulse forever. Infinite motion on a
+   decorative element pulls the eye on every screen visit and never lets go;
+   the "Start here" label and the ring already say where you are. Motion now
+   happens once, in response to something the user did.
+--------------------------------------------------------------------------- */
+@keyframes lc-pop {
+  0%   { transform: translateY(10px) scale(0.98); opacity: 0; }
+  100% { transform: none; opacity: 1; }
+}
+@keyframes lc-fall {
+  0%   { transform: translateY(-10vh) rotate(0deg);   opacity: 1; }
+  100% { transform: translateY(105vh) rotate(540deg); opacity: 0; }
+}
+
+.lc-pop  { animation: lc-pop 320ms var(--ease-out-soft) both; }
+.lc-fall { animation: lc-fall linear forwards; }

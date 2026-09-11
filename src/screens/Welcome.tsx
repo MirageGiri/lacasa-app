@@ -22,8 +22,8 @@ export default function Welcome({ onContinue }: { onContinue: () => void }) {
           C
         </div>
         <div>
-          <p className="text-3xl font-black tracking-tight">LA CASA</p>
-          <p className="mt-1 text-[13px] font-semibold leading-snug text-white/80">
+          <h1 className="text-3xl font-black tracking-tight">LA CASA</h1>
+          <p className="mt-1 text-sm font-semibold leading-snug text-white/85">
             {t('tagline')}
           </p>
         </div>
@@ -40,10 +40,10 @@ export default function Welcome({ onContinue }: { onContinue: () => void }) {
                 key={code}
                 onClick={() => setLang(code)}
                 aria-pressed={lang === code}
-                className={`rounded-full px-3 py-3.5 text-base font-extrabold transition ${
+                className={`min-h-13 rounded-full px-3 py-3.5 text-base font-extrabold transition-colors duration-(--duration-fast) ${
                   lang === code
                     ? 'bg-brand-600 text-white'
-                    : 'border-2 border-line bg-surface text-ink-soft'
+                    : 'border-2 border-line bg-surface text-ink-soft hover:border-line-strong'
                 }`}
               >
                 {code === 'es' ? 'Español' : 'English'}
@@ -66,7 +66,7 @@ export default function Welcome({ onContinue }: { onContinue: () => void }) {
             className="flex items-center justify-center gap-2 rounded-full bg-brand-600 px-5 py-4 text-[17px] font-extrabold text-white opacity-40"
           >
             {t('welcomeSend')}
-            <span className="rounded-full bg-white/25 px-2 py-0.5 text-[11px] font-bold">
+            <span className="rounded-full bg-white/25 px-2 py-0.5 text-xs font-bold">
               {t('welcomeSoon')}
             </span>
           </button>
@@ -81,7 +81,7 @@ export default function Welcome({ onContinue }: { onContinue: () => void }) {
         <section className="flex flex-col gap-2">
           <button
             onClick={onContinue}
-            className="rounded-full border-2 border-line bg-surface px-5 py-3.5 text-[17px] font-extrabold text-brand-600"
+            className="min-h-13 rounded-full border-2 border-brand-600 bg-surface px-5 py-3.5 text-[17px] font-extrabold text-brand-700 transition-colors duration-(--duration-fast) hover:bg-brand-50"
           >
             {t('welcomeGuest')}
           </button>

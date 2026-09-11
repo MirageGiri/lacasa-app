@@ -14,6 +14,9 @@ export default function Layout() {
 
   return (
     <div className="min-h-full">
+      <a href="#main" className="skip-link" onClick={(e) => { e.preventDefault(); document.getElementById('main')?.focus() }}>
+        {t('skipToContent')}
+      </a>
       <header className="sticky top-0 z-20 overflow-hidden bg-brand-600 text-white shadow-[var(--shadow-bar)]">
         {/* Drawn in a darker tint, never lighter: the white title has to keep
             its contrast wherever these land. */}
@@ -29,12 +32,12 @@ export default function Layout() {
             </span>
             <div className="leading-tight">
               <p className="text-base font-extrabold">{t('appName')}</p>
-              <p className="text-[11px] font-semibold text-white/80">{t('tagline')}</p>
+              <p className="text-xs font-semibold text-white/85">{t('tagline')}</p>
             </div>
           </div>
           <button
             onClick={toggle}
-            className="rounded-full bg-white/15 px-3 py-2 text-sm font-bold transition hover:bg-white/25"
+            className="grid min-h-11 min-w-11 place-items-center rounded-full bg-white/15 px-3 text-sm font-bold ring-1 ring-white/25 transition-colors duration-(--duration-fast) hover:bg-white/25 active:bg-white/30"
             aria-label={lang === 'en' ? 'Cambiar a español' : 'Switch to English'}
           >
             {lang === 'en' ? 'ES' : 'EN'}
@@ -47,7 +50,7 @@ export default function Layout() {
       <nav
         className="fixed inset-x-0 bottom-0 z-20 border-t border-line bg-surface/85 backdrop-blur-md"
         style={{ paddingBottom: 'env(safe-area-inset-bottom)' }}
-        aria-label={t('navHome')}
+        aria-label={t('navMain')}
       >
         <div className="mx-auto flex w-full max-w-2xl">
           {tabs.map(({ to, key, Icon, end }) => (
@@ -56,7 +59,7 @@ export default function Layout() {
               to={to}
               end={end}
               className={({ isActive }) =>
-                `flex flex-1 flex-col items-center gap-[3px] pb-2.5 pt-1.5 text-xs font-extrabold transition ${
+                `flex min-h-14 flex-1 flex-col items-center justify-center gap-[3px] pb-2 pt-1.5 text-xs font-extrabold transition-colors duration-(--duration-fast) ${
                   isActive ? 'text-brand-700' : 'text-ink-soft'
                 }`
               }
@@ -64,7 +67,7 @@ export default function Layout() {
               {({ isActive }) => (
                 <>
                   <span
-                    className={`grid h-8 w-14 place-items-center rounded-full transition ${
+                    className={`grid h-8 w-14 place-items-center rounded-full transition-colors duration-(--duration-fast) ${
                       isActive ? 'bg-brand-100' : 'bg-transparent'
                     }`}
                   >

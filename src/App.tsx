@@ -7,6 +7,7 @@ import Quiz from '@/screens/Quiz'
 import Goals from '@/screens/Goals'
 import Ask from '@/screens/Ask'
 import Profile from '@/screens/Profile'
+import ModuleComplete from '@/screens/ModuleComplete'
 import Storybook from '@/screens/Storybook'
 import StoryReader from '@/screens/StoryReader'
 
@@ -21,6 +22,7 @@ export default function App() {
         <Route path="module/:moduleId" element={<ModuleDetail />} />
         <Route path="module/:moduleId/item/:itemId" element={<ItemDetail />} />
         <Route path="module/:moduleId/quiz" element={<Quiz />} />
+        <Route path="module/:moduleId/done" element={<ModuleComplete />} />
         <Route path="stories" element={<Storybook />} />
         <Route path="goals" element={<Goals />} />
         <Route path="ask" element={<Ask />} />
