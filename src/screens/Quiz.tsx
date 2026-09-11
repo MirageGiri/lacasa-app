@@ -49,7 +49,7 @@ export default function Quiz() {
   if (finished) {
     const pct = Math.round((correct / questions.length) * 100)
     return (
-      <Screen>
+      <Screen width="read">
         <div className="card px-6 py-8 text-center">
           <span
             aria-hidden
@@ -79,7 +79,7 @@ export default function Quiz() {
   }
 
   return (
-    <Screen>
+    <Screen width="read">
       <BackLink to={`/module/${moduleId}`}>{b(mod.title)}</BackLink>
 
       <p className="mt-2 text-xs font-bold uppercase tracking-wide text-ink-soft">

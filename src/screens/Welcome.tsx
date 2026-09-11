@@ -1,5 +1,6 @@
 import { useLang } from '@/i18n/LanguageContext'
 import { MailIcon } from '@/components/icons'
+import { HeroScene } from '@/components/depth'
 
 /** First-launch screen. Language comes before everything else: a family that
  *  lands on an English screen may never find a toggle in a header. */
@@ -7,8 +8,8 @@ export default function Welcome({ onContinue }: { onContinue: () => void }) {
   const { t, lang, setLang } = useLang()
 
   return (
-    <div className="flex min-h-full flex-col items-center justify-center sm:py-8">
-      <div className="relative flex w-full max-w-md flex-col overflow-hidden bg-brand-600 sm:min-h-0 sm:rounded-[32px] sm:shadow-[var(--shadow-lift)]">
+    <div className="flex min-h-full flex-col items-center justify-center sm:px-6 sm:py-8">
+      <div className="relative flex w-full max-w-md flex-col overflow-hidden bg-gradient-to-br from-brand-600 via-brand-700 to-brand-900 sm:min-h-0 sm:rounded-[32px] sm:shadow-[var(--shadow-e3)] lg:grid lg:max-w-5xl lg:grid-cols-[1.1fr_1fr]">
       <span
         aria-hidden
         className="pointer-events-none absolute -left-16 -top-10 h-56 w-56 rounded-full border-[16px] border-white/10"
@@ -17,7 +18,7 @@ export default function Welcome({ onContinue }: { onContinue: () => void }) {
         aria-hidden
         className="pointer-events-none absolute -right-12 top-16 h-32 w-32 rounded-full bg-brand-800/30"
       />
-      <div className="relative flex flex-col items-center gap-4 px-6 pb-10 pt-16 text-center text-white">
+      <div className="relative flex flex-col items-center gap-4 px-6 pb-10 pt-16 text-center text-white lg:justify-center lg:px-10 lg:py-12">
         <div className="grid h-[76px] w-[76px] place-items-center rounded-3xl bg-white/15 text-4xl font-black">
           C
         </div>
@@ -27,9 +28,10 @@ export default function Welcome({ onContinue }: { onContinue: () => void }) {
             {t('tagline')}
           </p>
         </div>
+        <HeroScene className="hidden h-[280px] w-full max-w-[380px] lg:block" />
       </div>
 
-      <div className="relative flex flex-1 flex-col gap-6 rounded-t-[28px] bg-surface px-6 pb-8 pt-7">
+      <div className="relative flex flex-1 flex-col gap-6 rounded-t-[28px] bg-surface px-6 pb-8 pt-7 lg:rounded-none lg:px-10 lg:py-10">
         <section className="flex flex-col gap-2.5">
           <h2 className="text-xs font-extrabold uppercase tracking-wider text-ink-soft">
             {t('welcomeChoose')}

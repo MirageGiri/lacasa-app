@@ -5,6 +5,7 @@ import type { Block } from '@/content/types'
 import { useLang } from '@/i18n/LanguageContext'
 import { useProgress } from '@/state/ProgressContext'
 import { Badge, DraftBadge, ProgressFill, accent } from '@/components/ui'
+import { IconBlock } from '@/components/depth'
 import { ArrowLeftIcon, CheckIcon, XIcon } from '@/components/icons'
 
 /* One idea per screen, rather than one long scroll.
@@ -81,12 +82,16 @@ export default function ItemDetail() {
   }
 
   return (
-    <main id="main" tabIndex={-1} className="mx-auto flex min-h-[calc(100dvh-8rem)] w-full max-w-2xl flex-col px-4 pb-28 pt-3">
+    <main
+      id="main"
+      tabIndex={-1}
+      className="mx-auto flex min-h-[calc(100dvh-8rem)] w-full max-w-6xl flex-col px-4 pb-28 pt-3 sm:px-6 lg:min-h-0 lg:px-10 lg:pb-12 lg:pt-8"
+    >
       {/* Progress across the lesson's steps */}
       <div className="flex items-center gap-3">
         <Link
-          to="/"
-          aria-label={t('backToPath')}
+          to={`/module/${moduleId}`}
+          aria-label={t('backToModule')}
           className="-ml-1.5 grid h-11 w-11 shrink-0 place-items-center rounded-full text-ink-soft transition-colors duration-(--duration-fast) hover:bg-line active:bg-line"
         >
           <XIcon size={22} />
@@ -106,38 +111,79 @@ export default function ItemDetail() {
         </span>
       </div>
 
-      <p className="mt-5 text-xs font-extrabold uppercase tracking-wider text-ink-soft">
-        {b(mod.title)} · {t('lesson')} {idx + 1}
-      </p>
-      <h1 className="mt-1 text-[26px] font-extrabold leading-tight">{b(item.title)}</h1>
+      <div className="mt-5 grid flex-1 items-start gap-6 lg:grid-cols-[1fr_300px]">
+        {/* Lesson card */}
+        <article className="flex h-full flex-col lg:min-h-[420px] lg:rounded-[28px] lg:border lg:border-line lg:bg-surface lg:p-9 lg:shadow-[var(--shadow-e2)]">
+          <div className="flex items-start gap-4">
+            <IconBlock icon={mod.icon} accent={mod.accent} size={52} className="hidden sm:grid" />
+            <div className="min-w-0">
+              <p className="text-xs font-extrabold uppercase tracking-wider text-ink-soft">
+                {b(mod.title)} · {t('lesson')} {idx + 1}
+              </p>
+              <h1 className="mt-1 text-[26px] font-extrabold leading-tight lg:text-[32px]">{b(item.title)}</h1>
+            </div>
+          </div>
 
-      <div className="mt-2 flex flex-wrap gap-2">
-        <DraftBadge />
-        {item.needsSourceCopy && <Badge tone="todo">{t('needsCopy')}</Badge>}
-      </div>
+          <div className="mt-2 flex flex-wrap gap-2">
+            <DraftBadge />
+            {item.needsSourceCopy && <Badge tone="todo">{t('needsCopy')}</Badge>}
+          </div>
 
-      {/* The step itself. `key` restarts the entrance animation each time. */}
-      <div key={step} className="lc-pop mt-6 flex flex-1 flex-col justify-center">
-        {item.body[step] ? <BlockView block={item.body[step]} /> : null}
-      </div>
+          {/* The step itself. `key` restarts the entrance animation each time. */}
+          <div key={step} className="lc-pop mt-6 flex max-w-[68ch] flex-1 flex-col justify-center lg:justify-start">
+            {item.body[step] ? <BlockView block={item.body[step]} /> : null}
+          </div>
 
-      <div className="mt-8 flex gap-3">
-        {step > 0 && (
-          <button
-            onClick={() => setStep((s) => s - 1)}
-            aria-label={t('previous')}
-            className="grid min-h-13 min-w-16 place-items-center rounded-full border-2 border-line bg-surface px-5 text-ink-soft transition-colors duration-(--duration-fast) hover:border-line-strong active:bg-line"
-          >
-            <ArrowLeftIcon size={22} />
-          </button>
-        )}
-        <button
-          onClick={() => (last ? finish() : setStep((s) => s + 1))}
-          className={`flex min-h-13 flex-1 items-center justify-center gap-2 rounded-full px-6 py-3.5 text-base font-extrabold text-white shadow-[var(--shadow-card)] transition-[filter,transform] duration-(--duration-fast) hover:brightness-90 active:scale-[0.98] ${a.solid}`}
-        >
-          {last && <CheckIcon size={20} />}
-          {last ? t('finishLesson') : t('continueStep')}
-        </button>
+          <div className="mt-8 flex gap-3 lg:max-w-md">
+            {step > 0 && (
+              <button
+                onClick={() => setStep((s) => s - 1)}
+                aria-label={t('previous')}
+                className="grid min-h-13 min-w-16 place-items-center rounded-full border-2 border-line bg-surface px-5 text-ink-soft transition-colors duration-(--duration-fast) hover:border-line-strong active:bg-line"
+              >
+                <ArrowLeftIcon size={22} />
+              </button>
+            )}
+            <button
+              onClick={() => (last ? finish() : setStep((s) => s + 1))}
+              className={`flex min-h-13 flex-1 items-center justify-center gap-2 rounded-full px-6 py-3.5 text-base font-extrabold text-white shadow-[var(--shadow-e2)] transition-[filter,transform] duration-(--duration-fast) hover:brightness-90 active:scale-[0.98] ${a.solid}`}
+            >
+              {last && <CheckIcon size={20} />}
+              {last ? t('finishLesson') : t('continueStep')}
+            </button>
+          </div>
+        </article>
+
+        {/* Module outline — laptop only; on a phone the lesson is the screen. */}
+        <aside className="hidden rounded-card border border-line bg-surface p-4 shadow-[var(--shadow-e1)] lg:block">
+          <h2 className="px-2 text-xs font-bold uppercase tracking-wider text-ink-soft">{t('inThisModule')}</h2>
+          <ol className="mt-2 grid gap-1">
+            {list.map((it, i) => {
+              const done = isRead(it.id)
+              const here = it.id === itemId
+              return (
+                <li key={it.id}>
+                  <Link
+                    to={`/module/${moduleId}/item/${it.id}`}
+                    aria-current={here ? 'page' : undefined}
+                    className={`flex min-h-11 items-center gap-3 rounded-xl px-2 py-1.5 text-[15px] transition-colors duration-(--duration-fast) ${
+                      here ? `${a.bg} font-extrabold` : 'font-semibold hover:bg-brand-50'
+                    }`}
+                  >
+                    <span
+                      className={`grid h-7 w-7 shrink-0 place-items-center rounded-full text-xs font-extrabold ${
+                        done ? 'bg-leaf-600 text-white' : here ? `${a.solid} text-white` : 'bg-line text-ink-soft'
+                      }`}
+                    >
+                      {done ? <CheckIcon size={13} /> : i + 1}
+                    </span>
+                    <span className="min-w-0 flex-1 leading-snug">{b(it.title)}</span>
+                  </Link>
+                </li>
+              )
+            })}
+          </ol>
+        </aside>
       </div>
     </main>
   )

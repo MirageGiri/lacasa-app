@@ -28,6 +28,28 @@
 
 ---
 
+## Web-first update (2026-09-11)
+
+Direction from Mirage: web app before mobile, more 3D motion, more professional,
+less white space, no numbered lesson path. Skill queries used:
+`"health education learning platform web dashboard" --design-system --variance 6 --motion 6 --density 7`,
+`"3d card tilt perspective" --domain style`, `"3d transform tilt hover" --domain gsap`,
+plus the project's `redesign-existing-projects` and `high-end-visual-design` skills.
+
+- **Style:** Dimensional Layering (elevation scale `--shadow-e1..e3`, `translateZ` depth)
+  with clay-style 3D icon blocks (`.block3d`) — the Claymorphism "soft 3D" cue, kept to
+  icons so body surfaces stay clean and professional.
+- **3D:** CSS 3D only (no WebGL): pointer-tilt cards with glare (`TiltSurface`), an
+  isometric MyPlate hero scene with floating topic blocks (`HeroScene`). Tilt is off for
+  touch and reduced motion. The hero float is the one continuous animation — an explicit
+  product request; it is decorative, slow, and disabled by `prefers-reduced-motion`.
+- **Layout:** fixed navy sidebar at `lg` (1024px+), `max-w-7xl` content; dashboard is a
+  bento grid (hero 8/12 + stats 4/12, featured module 2 columns, module cards, story
+  banner). Phone keeps header + bottom tab bar.
+- **Type:** Plus Jakarta Sans for headings (`--font-display`), Atkinson Hyperlegible Next
+  for body. Body 16px at `lg`, 17px on phones.
+- **Components:** `src/components/depth.tsx` (TiltSurface, IconBlock, HeroScene, ProgressRing).
+
 ## Global Rules
 
 ### Color Palette

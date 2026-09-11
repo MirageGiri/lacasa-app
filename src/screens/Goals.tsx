@@ -4,6 +4,7 @@ import { useLang } from '@/i18n/LanguageContext'
 import { useProgress } from '@/state/ProgressContext'
 import { Screen, accent } from '@/components/ui'
 import { CheckIcon, FlameIcon, ModuleIcon, PlusIcon, TargetIcon } from '@/components/icons'
+import { IconBlock } from '@/components/depth'
 
 export default function Goals() {
   const { t, b } = useLang()
@@ -17,23 +18,23 @@ export default function Goals() {
   const available = goalOptions.filter((o) => !goals.some((g) => g.goalId === o.id))
 
   return (
-    <Screen title={t('goalsTitle')}>
-      {chosen.length === 0 && !picking && (
-        <p className="mb-5 text-[17px] leading-relaxed text-ink-soft">{t('goalsEmpty')}</p>
-      )}
-
-      <div className="grid gap-3">
+    <Screen title={t('goalsTitle')} subtitle={t('goalsEmpty')}>
+      <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
         {chosen.map(({ option }) => {
           const done = goalDoneToday(option.id)
           const streak = goalStreak(option.id)
           const mod = moduleById[option.moduleId]
           const a = accent(mod?.accent ?? 'brand')
           return (
-            <div key={option.id} className="card px-4 py-4">
+            <div key={option.id} className="card lc-rise flex flex-col p-5">
               <div className="flex items-start gap-3">
-                <span aria-hidden className={`grid h-11 w-11 shrink-0 place-items-center rounded-2xl ${a.bg} ${a.text}`}>
-                  {mod ? <ModuleIcon name={mod.icon} size={22} /> : <TargetIcon size={22} />}
-                </span>
+                {mod ? (
+                  <IconBlock icon={mod.icon} accent={mod.accent} size={46} />
+                ) : (
+                  <span aria-hidden className={`grid h-11 w-11 shrink-0 place-items-center rounded-2xl ${a.bg} ${a.text}`}>
+                    <TargetIcon size={22} />
+                  </span>
+                )}
                 <div className="min-w-0 flex-1">
                   <p className="font-bold leading-snug">{b(option.text)}</p>
                   {streak > 0 && (
@@ -44,7 +45,7 @@ export default function Goals() {
                   )}
                 </div>
               </div>
-              <div className="mt-3 flex gap-2">
+              <div className="mt-auto flex gap-2 pt-4">
                 <button
                   onClick={() => checkInGoal(option.id)}
                   aria-pressed={done}
@@ -68,9 +69,9 @@ export default function Goals() {
       </div>
 
       {picking ? (
-        <div className="mt-4 card px-4 py-4">
-          <p className="mb-3 font-extrabold">{t('goalsChoose')}</p>
-          <div className="grid gap-2">
+        <div className="mt-5 card p-5">
+          <p className="mb-3 font-display text-lg font-extrabold">{t('goalsChoose')}</p>
+          <div className="grid gap-2 md:grid-cols-2 xl:grid-cols-3">
             {available.map((o) => (
               <button
                 key={o.id}
@@ -91,7 +92,7 @@ export default function Goals() {
         available.length > 0 && (
           <button
             onClick={() => setPicking(true)}
-            className="mt-4 flex min-h-13 w-full items-center justify-center gap-2 rounded-full border-2 border-dashed border-brand-400 px-5 py-3.5 font-extrabold text-brand-700 transition-colors duration-(--duration-fast) hover:bg-brand-50"
+            className="mt-5 flex min-h-13 w-full items-center md:w-auto md:px-8 justify-center gap-2 rounded-full border-2 border-dashed border-brand-400 px-5 py-3.5 font-extrabold text-brand-700 transition-colors duration-(--duration-fast) hover:bg-brand-50"
           >
             <PlusIcon size={20} />
             {t('goalsAdd')}

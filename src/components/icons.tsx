@@ -201,3 +201,11 @@ export function ModuleIcon({ name, size = 24, className }: P & { name: ModuleIco
   const Icon = MODULE_ICONS[name]
   return <Icon size={size} className={className} />
 }
+
+export const StoryIcon = ({ size = 24, className }: P) => (
+  <svg {...base(size)} className={className}>
+    <path d="M12 7v14" />
+    <path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z" />
+  </svg>
+)
+

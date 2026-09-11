@@ -8,10 +8,8 @@ export default function Storybook() {
   const { t, b } = useLang()
 
   return (
-    <Screen title={t('storiesTitle')}>
-      <p className="mb-5 text-[17px] leading-relaxed text-ink-soft">{t('storiesBlurb')}</p>
-
-      <div className="grid gap-3">
+    <Screen title={t('storiesTitle')} subtitle={t('storiesBlurb')}>
+      <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
         {stories.map((story) => (
           <Link
             key={story.id}

@@ -1,9 +1,10 @@
 import { useState } from 'react'
+import type { CSSProperties } from 'react'
 import { useLang } from '@/i18n/LanguageContext'
 import { chatProvider } from '@/lib/chatProvider'
 import type { ChatMessage } from '@/lib/chatProvider'
 import { Screen } from '@/components/ui'
-import { ChevronDownIcon } from '@/components/icons'
+import { ChatIcon, ChevronDownIcon } from '@/components/icons'
 
 /** Seeded from the prototype's "Ask a Question" table. Once Supabase is on,
  *  this list comes from the `questions` table instead. */
@@ -56,64 +57,78 @@ export default function Ask() {
   }
 
   return (
-    <Screen title={t('askTitle')}>
-      <p className="mb-5 text-[17px] leading-relaxed text-ink-soft">{t('askIntro')}</p>
-
-      <div className="grid gap-2">
-        {faq.map((entry, i) => (
-          <div key={i} className="card overflow-hidden">
-            <button
-              onClick={() => setOpen(open === i ? null : i)}
-              aria-expanded={open === i}
-              className="flex min-h-13 w-full items-start gap-3 px-4 py-3.5 text-left transition-colors duration-(--duration-fast) hover:bg-brand-50/60"
-            >
-              <ChevronDownIcon
-                size={20}
-                className={`mt-0.5 shrink-0 text-brand-600 transition-transform duration-(--duration-base) ${open === i ? '' : '-rotate-90'}`}
-              />
-              <span className="flex-1 font-bold leading-snug">{b(entry.q)}</span>
-            </button>
-            {open === i && (
-              <p className="px-4 pb-4 pl-11 text-[17px] leading-relaxed text-ink-soft">{b(entry.a)}</p>
-            )}
-          </div>
-        ))}
-      </div>
-
-      {sent.length > 0 && (
-        <div className="mt-5 grid gap-2">
-          {sent.map((m) => (
-            <div key={m.id} className="rounded-card bg-brand-50 px-4 py-3">
-              <p className="font-semibold">{m.text}</p>
-              <p className="mt-1 text-sm text-ink-soft">{t('askPending')}</p>
+    <Screen title={t('askTitle')} subtitle={t('askIntro')}>
+      <div className="grid items-start gap-6 lg:grid-cols-[1fr_380px]">
+        <div className="grid content-start gap-3">
+          {faq.map((entry, i) => (
+            <div key={i} className="card overflow-hidden">
+              <button
+                onClick={() => setOpen(open === i ? null : i)}
+                aria-expanded={open === i}
+                className="flex min-h-13 w-full items-start gap-3 px-4 py-3.5 text-left transition-colors duration-(--duration-fast) hover:bg-brand-50/60"
+              >
+                <ChevronDownIcon
+                  size={20}
+                  className={`mt-0.5 shrink-0 text-brand-600 transition-transform duration-(--duration-base) ${open === i ? '' : '-rotate-90'}`}
+                />
+                <span className="flex-1 font-bold leading-snug">{b(entry.q)}</span>
+              </button>
+              {open === i && (
+                <p className="px-4 pb-4 pl-11 text-[17px] leading-relaxed text-ink-soft">{b(entry.a)}</p>
+              )}
             </div>
           ))}
         </div>
-      )}
 
-      {/* A visible label, not just a placeholder: the placeholder vanishes the
-          moment someone starts typing, taking the instruction with it. */}
-      <form onSubmit={submit} className="mt-6">
-        <label htmlFor="ask-input" className="mb-2 block text-[15px] font-extrabold">
-          {t('askLabel')}
-        </label>
-        <div className="flex gap-2">
-          <input
-            id="ask-input"
-            value={draft}
-            onChange={(e) => setDraft(e.target.value)}
-            placeholder={t('askPlaceholder')}
-            className="min-h-12 min-w-0 flex-1 rounded-full border-2 border-line-strong bg-surface px-4 py-3 text-[17px] placeholder:text-ink-soft focus-visible:border-brand-600"
-          />
-          <button
-            type="submit"
-            disabled={!draft.trim()}
-            className="min-h-12 rounded-full bg-brand-600 px-5 py-3 font-extrabold text-white transition-colors duration-(--duration-fast) hover:bg-brand-700 disabled:cursor-not-allowed disabled:opacity-40"
-          >
-            {t('askSend')}
-          </button>
-        </div>
-      </form>
+        {/* Ask panel — sits beside the FAQ on a laptop. */}
+        <aside className="card flex flex-col gap-4 p-5 lg:sticky lg:top-8">
+          <div className="flex items-center gap-3">
+            <span
+              aria-hidden
+              className="block3d h-11 w-11"
+              style={{ '--b-hi': '#63AFE6', '--b-face': '#2278BC', '--b-lo': '#1A5F96', '--b-edge': '#113A5A' } as CSSProperties}
+            >
+              <ChatIcon size={22} />
+            </span>
+            <h2 className="text-lg font-extrabold leading-tight">{t('askSide')}</h2>
+          </div>
+          <p className="text-[15px] leading-relaxed text-ink-soft">{t('askSideP')}</p>
+
+          {sent.length > 0 && (
+            <div className="grid gap-2">
+              {sent.map((m) => (
+                <div key={m.id} className="rounded-2xl bg-brand-50 px-4 py-3">
+                  <p className="font-semibold">{m.text}</p>
+                  <p className="mt-1 text-sm text-ink-soft">{t('askPending')}</p>
+                </div>
+              ))}
+            </div>
+          )}
+
+          {/* A visible label, not just a placeholder: the placeholder vanishes the
+              moment someone starts typing, taking the instruction with it. */}
+          <form onSubmit={submit}>
+            <label htmlFor="ask-input" className="mb-2 block text-[15px] font-extrabold">
+              {t('askLabel')}
+            </label>
+            <textarea
+              id="ask-input"
+              rows={3}
+              value={draft}
+              onChange={(e) => setDraft(e.target.value)}
+              placeholder={t('askPlaceholder')}
+              className="block w-full resize-y rounded-2xl border-2 border-line-strong bg-surface px-4 py-3 text-[17px] placeholder:text-ink-soft focus-visible:border-brand-600"
+            />
+            <button
+              type="submit"
+              disabled={!draft.trim()}
+              className="mt-3 min-h-12 w-full rounded-full bg-brand-600 px-5 py-3 font-extrabold text-white transition-colors duration-(--duration-fast) hover:bg-brand-700 disabled:cursor-not-allowed disabled:opacity-40"
+            >
+              {t('askSend')}
+            </button>
+          </form>
+        </aside>
+      </div>
     </Screen>
   )
 }

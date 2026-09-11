@@ -39,24 +39,26 @@ export default function Profile() {
 
   return (
     <Screen title={t('progressTitle')}>
-      <div className="grid grid-cols-2 gap-3">
-        <div className="card px-4 py-4">
-          <p className="text-[34px] font-black leading-none tabular-nums text-brand-700">
+      <div className="grid items-start gap-4 lg:grid-cols-[1fr_360px] lg:gap-5">
+      <div className="grid gap-4">
+      <div className="grid grid-cols-2 gap-4">
+        <div className="card p-5">
+          <p className="font-display text-[34px] font-black leading-none tabular-nums text-brand-700">
             {overall.itemsRead}
             <span className="text-lg font-extrabold text-ink-soft">/{overall.totalItems}</span>
           </p>
-          <p className="mt-1.5 text-[13px] font-bold text-ink-soft">{t('progressRead')}</p>
+          <p className="mt-1.5 text-sm font-bold text-ink-soft">{t('progressRead')}</p>
         </div>
-        <div className="card px-4 py-4">
-          <p className="text-[34px] font-black leading-none tabular-nums text-leaf-600">
+        <div className="card p-5">
+          <p className="font-display text-[34px] font-black leading-none tabular-nums text-leaf-600">
             {overall.modulesDone}
             <span className="text-lg font-extrabold text-ink-soft">/{overall.totalModules}</span>
           </p>
-          <p className="mt-1.5 text-[13px] font-bold text-ink-soft">{t('progressMods')}</p>
+          <p className="mt-1.5 text-sm font-bold text-ink-soft">{t('progressMods')}</p>
         </div>
       </div>
 
-      <section className="card mt-3 flex flex-col gap-3 px-4 py-4">
+      <section className="card flex flex-col gap-3 px-4 py-4">
         <div className="flex items-center justify-between gap-3">
           <div className="flex items-center gap-2.5">
             <FlameIcon size={24} className="text-sun-600" />
@@ -64,7 +66,7 @@ export default function Profile() {
               {leadStreak} {t('goalStreak')}
             </span>
           </div>
-          <span className="min-w-0 truncate text-[13px] font-bold text-ink-soft">
+          <span className="min-w-0 truncate text-sm font-bold text-ink-soft">
             {leadOption ? b(leadOption.text) : t('progressNoGoal')}
           </span>
         </div>
@@ -92,7 +94,7 @@ export default function Profile() {
       </section>
 
       {started.length > 0 && (
-        <section className="card mt-3 flex flex-col gap-3.5 px-4 py-4">
+        <section className="card flex flex-col gap-3.5 px-4 py-4">
           <h2 className="text-xs font-extrabold uppercase tracking-wider text-ink-soft">
             {t('progressByMod')}
           </h2>
@@ -104,7 +106,7 @@ export default function Profile() {
                   <span className="min-w-0 flex-1 text-[15px] font-bold leading-snug">
                     {b(m.title)}
                   </span>
-                  <span className="shrink-0 text-[13px] font-extrabold tabular-nums text-ink-soft">
+                  <span className="shrink-0 text-sm font-extrabold tabular-nums text-ink-soft">
                     {p.read}/{itemsByModule(m.id).length}
                   </span>
                 </div>
@@ -115,7 +117,9 @@ export default function Profile() {
         </section>
       )}
 
-      <section className="card mt-3 px-4 py-4">
+      </div>
+      <div className="grid gap-4 lg:sticky lg:top-8">
+      <section className="card px-4 py-4">
         <h2 className="text-xs font-extrabold uppercase tracking-wider text-ink-soft">
           {t('language')}
         </h2>
@@ -137,7 +141,7 @@ export default function Profile() {
         </div>
       </section>
 
-      <section className="card mt-3 px-4 py-4">
+      <section className="card px-4 py-4">
         {confirming ? (
           <>
             <p className="text-[17px] leading-relaxed">{t('resetConfirm')}</p>
@@ -168,6 +172,9 @@ export default function Profile() {
           </button>
         )}
       </section>
+
+      </div>
+      </div>
 
       {/* Developer note only. It was rendering to everyone: untranslated on a
           Spanish screen, and telling a parent to "add Supabase keys" — which

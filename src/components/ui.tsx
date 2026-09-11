@@ -79,10 +79,39 @@ export function DraftBadge() {
   return <Badge tone="draft">{t('draftBadge')}</Badge>
 }
 
-export function Screen({ title, children }: { title?: string; children: ReactNode }) {
+/** Page frame. `width` picks the content measure: `wide` for dashboards and
+ *  grids, `read` for single-column reading screens. On laptop widths the
+ *  sidebar owns navigation, so there is no bottom-bar padding. */
+export function Screen({
+  title,
+  subtitle,
+  actions,
+  width = 'wide',
+  children,
+}: {
+  title?: string
+  subtitle?: string
+  actions?: ReactNode
+  width?: 'wide' | 'read'
+  children: ReactNode
+}) {
   return (
-    <main id="main" tabIndex={-1} className="mx-auto w-full max-w-2xl px-4 pb-28 pt-4">
-      {title && <h1 className="mb-4 text-3xl font-extrabold tracking-tight">{title}</h1>}
+    <main
+      id="main"
+      tabIndex={-1}
+      className={`mx-auto w-full px-4 pb-28 pt-4 sm:px-6 lg:px-10 lg:pb-12 lg:pt-8 ${
+        width === 'wide' ? 'max-w-7xl' : 'max-w-4xl'
+      }`}
+    >
+      {title && (
+        <header className="mb-5 flex flex-wrap items-end justify-between gap-3 lg:mb-6">
+          <div>
+            <h1 className="text-3xl font-extrabold tracking-tight lg:text-4xl">{title}</h1>
+            {subtitle && <p className="mt-1.5 max-w-2xl text-[17px] leading-relaxed text-ink-soft">{subtitle}</p>}
+          </div>
+          {actions}
+        </header>
+      )}
       {children}
     </main>
   )
