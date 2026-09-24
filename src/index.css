@@ -3,12 +3,13 @@
 /* ---------------------------------------------------------------------------
    LA CASA design tokens.
 
-   Light blue theme. The Glide prototype's magenta was a baseline, not a brand
-   requirement; blue reads calmer and more clinical, which suits health guidance
-   coming from a hospital. The old magenta survives as the `berry` accent so the
-   CASA identity is not lost entirely.
+   Pink theme — LA CASA's own magenta, carried over from the Glide prototype.
+   (A light-blue theme was tried in Sept 2026; the LA CASA team asked to keep
+   the pink, so it is back.)
+   The Glide magenta #E0218A is darkened to #C2185B for fills and text so it
+   clears WCAG AA: 5.9:1 under white text, rather than 4.4:1.
 
-   Contrast is the constraint, not taste: brand-600 sits at 5.4:1 on white, so
+   Contrast is the constraint, not taste: brand-600 sits at 5.9:1 on white, so
    it works both as button fill under white text and as text on a white card.
    The pale end of each ramp is a tint only — never put text on it below -800.
 
@@ -24,17 +25,19 @@
    - Ad-hoc hex values in screens moved here as tokens (paper, danger).
 --------------------------------------------------------------------------- */
 @theme {
-  /* Brand — light blue */
-  --color-brand-50:  #F2F8FE;
-  --color-brand-100: #E1F0FC;
-  --color-brand-200: #C3E1F8;
-  --color-brand-300: #97CBF1;
-  --color-brand-400: #63AFE6;
-  --color-brand-500: #3593D8;
-  --color-brand-600: #2278BC;
-  --color-brand-700: #1A5F96;
-  --color-brand-800: #164B75;
-  --color-brand-900: #113A5A;
+  /* Brand — LA CASA pink */
+  --color-brand-50:  #FDF2F7;
+  --color-brand-100: #FCE7F1;
+  --color-brand-200: #FBCFE3;
+  --color-brand-300: #F9A8CC;
+  --color-brand-400: #F472AE;
+  --color-brand-500: #E0218A;
+  --color-brand-600: #C2185B;
+  --color-brand-700: #9D174D;
+  --color-brand-800: #831843;
+  --color-brand-900: #6B1338;
+  /* Sidebar / deep ground under white text. */
+  --color-brand-950: #3E0A24;
 
   /* Module accents. Each carries a -100 tint, a -500 mark and an -800 text
      value so a module's color is one decision, not three. */
@@ -49,10 +52,25 @@
   --color-sun-700:   #9C6400;
   --color-sun-800:   #8A5A00;
 
+  /* Berry sits too close to the pink brand to mark a module now; it is kept
+     for decoration (the MyPlate protein wedge) only. Modules use coral/plum. */
   --color-berry-100: #FBDCEA;
   --color-berry-500: #D6337F;
   --color-berry-600: #B02566;
   --color-berry-800: #7E1A49;
+
+  /* Tomato, from the MyPlate wedge — Food Servings. Warm, so it sits with
+     the pink rather than against it, and far enough from sun to read apart. */
+  --color-coral-100: #FDE5DC;
+  --color-coral-500: #F26B3A;
+  --color-coral-600: #C2410C;
+  --color-coral-800: #7C2D12;
+
+  /* Violet, so Sugar Smart has its own color beside the pink brand. */
+  --color-plum-100:  #EDE9FE;
+  --color-plum-500:  #8B5CF6;
+  --color-plum-600:  #7C3AED;
+  --color-plum-800:  #5B21B6;
 
   /* Teal rather than blue, so Hydration stays distinct from the brand. */
   --color-aqua-100:  #D3F0F6;
@@ -60,15 +78,16 @@
   --color-aqua-600:  #0B7D93;
   --color-aqua-800:  #075A6B;
 
-  /* Neutrals, cooled to sit under a blue brand rather than fight it. */
-  --color-ink:      #10202E;
-  --color-ink-soft: #4A6172;
-  --color-line:     #DBEAF7;
+  /* Neutrals, warmed toward rose so they sit under a pink brand rather than
+     fight it. */
+  --color-ink:      #1A1220;
+  --color-ink-soft: #5C4A57;
+  --color-line:     #F1E1EA;
   /* Form-control boundary. `line` is 1.2:1 on white — fine for dividers, too
-     faint for an input a user has to find. This is 3.2:1 (WCAG non-text). */
-  --color-line-strong: #7893A8;
+     faint for an input a user has to find. This is 4.0:1 (WCAG non-text). */
+  --color-line-strong: #8E7A88;
   --color-surface:  #FFFFFF;
-  --color-canvas:   #F4FAFF;
+  --color-canvas:   #FFF7FA;
 
   /* Destructive / wrong-answer. Always paired with an icon or words, never
      color alone. */
@@ -86,15 +105,15 @@
   --color-paper-ink:   #2A1F14;
   --color-paper-soft:  #7A5A3A;
 
-  /* Depth. Shadows are blue-tinted rather than grey so cards sit on the
+  /* Depth. Shadows are rose-tinted rather than grey so cards sit on the
      ground rather than floating over a different scene. */
-  --shadow-card: 0 1px 2px rgb(16 32 46 / 0.04), 0 10px 26px -14px rgb(34 120 188 / 0.30);
-  --shadow-lift: 0 2px 4px rgb(16 32 46 / 0.05), 0 16px 34px -14px rgb(34 120 188 / 0.42);
-  --shadow-bar:  0 8px 24px -12px rgb(23 74 118 / 0.55);
+  --shadow-card: 0 1px 2px rgb(26 18 32 / 0.04), 0 10px 26px -14px rgb(194 24 91 / 0.26);
+  --shadow-lift: 0 2px 4px rgb(26 18 32 / 0.05), 0 16px 34px -14px rgb(194 24 91 / 0.36);
+  --shadow-bar:  0 8px 24px -12px rgb(131 24 67 / 0.55);
   /* Elevation scale for the dimensional (layered 3D) web layout. */
-  --shadow-e1: 0 1px 2px rgb(16 32 46 / 0.06), 0 2px 6px -2px rgb(34 120 188 / 0.16);
-  --shadow-e2: 0 1px 2px rgb(16 32 46 / 0.05), 0 12px 28px -12px rgb(34 120 188 / 0.34);
-  --shadow-e3: 0 2px 4px rgb(16 32 46 / 0.06), 0 24px 48px -18px rgb(23 74 118 / 0.50);
+  --shadow-e1: 0 1px 2px rgb(26 18 32 / 0.06), 0 2px 6px -2px rgb(194 24 91 / 0.14);
+  --shadow-e2: 0 1px 2px rgb(26 18 32 / 0.05), 0 12px 28px -12px rgb(194 24 91 / 0.30);
+  --shadow-e3: 0 2px 4px rgb(26 18 32 / 0.06), 0 24px 48px -18px rgb(131 24 67 / 0.48);
 
   /* Display face for headings on the web layout: a geometric sans with more
      presence than the reading face, full Spanish coverage. Body copy stays in
@@ -143,9 +162,9 @@ body::before {
   z-index: -1;
   pointer-events: none;
   background:
-    radial-gradient(1000px 620px at 8% -8%,  #DCEDFC 0%, transparent 62%),
-    radial-gradient(820px 560px at 94% 4%,   #D6F1F7 0%, transparent 58%),
-    radial-gradient(900px 640px at 50% 112%, #E4F1FE 0%, transparent 60%),
+    radial-gradient(1000px 620px at 8% -8%,  #FCE4EF 0%, transparent 62%),
+    radial-gradient(820px 560px at 94% 4%,   #FDEBDD 0%, transparent 58%),
+    radial-gradient(900px 640px at 50% 112%, #FBE6F0 0%, transparent 60%),
     var(--color-canvas);
 }
 
@@ -174,6 +193,9 @@ a, button, input, textarea, select, label { touch-action: manipulation; }
   box-shadow: var(--shadow-lift);
 }
 main[tabindex="-1"]:focus { outline: none; }
+/* The chat composer draws its focus on the surrounding pill (focus-within),
+   so the textarea's own ring would be a second, inner ring. */
+.composer-input:focus-visible { outline: none; }
 .skip-link:focus { top: calc(env(safe-area-inset-top) + 0.75rem); }
 
 /* Visible focus for keyboard and switch-control users. */
@@ -303,13 +325,13 @@ h1, h2, h3, .font-display { font-family: var(--font-display); letter-spacing: -0
   background:
     radial-gradient(circle at 50% 50%, transparent 0 58%, rgb(255 255 255 / 0.9) 58.5% 64%, transparent 64.5%),
     conic-gradient(from -90deg, #2E9E5B 0 30%, #E4572E 30% 50%, #F0A202 50% 75%, #B02566 75% 100%);
-  box-shadow: 0 0 0 10px #F5FAFF, 0 0 0 11px rgb(16 32 46 / 0.08);
+  box-shadow: 0 0 0 10px #FFF6FA, 0 0 0 11px rgb(26 18 32 / 0.08);
 }
 .scene-plate-edge {
   position: absolute; inset: -10px; border-radius: inherit;
-  background: #C9DCEB;
+  background: #EACFDC;
   transform: translateZ(-14px);
-  box-shadow: 0 30px 60px -10px rgb(8 30 50 / 0.55);
+  box-shadow: 0 30px 60px -10px rgb(62 10 36 / 0.55);
 }
 .scene-orbit {
   position: absolute; inset: -34px; border-radius: 999px;
@@ -325,7 +347,7 @@ h1, h2, h3, .font-display { font-family: var(--font-display); letter-spacing: -0
   position: absolute; left: 50%; bottom: -26px;
   width: 70%; height: 10px; margin-left: -35%;
   border-radius: 999px;
-  background: rgb(8 30 50 / 0.35);
+  background: rgb(62 10 36 / 0.35);
   filter: blur(6px);
   animation: lc-shadow 6s ease-in-out infinite;
 }
@@ -345,6 +367,14 @@ h1, h2, h3, .font-display { font-family: var(--font-display); letter-spacing: -0
   0%   { opacity: 0; transform: translateY(14px) scale(0.985); }
   100% { opacity: 1; transform: none; }
 }
+/* Typing indicator — the one looping animation the skill allows: it means
+   "loading", and it disappears the moment the answer starts. */
+@keyframes lc-dot {
+  0%, 80%, 100% { transform: translateY(0); opacity: 0.45; }
+  40%           { transform: translateY(-4px); opacity: 1; }
+}
+.lc-dot { animation: lc-dot 1s ease-in-out infinite; }
+
 .lc-rise { animation: lc-rise 520ms var(--ease-out-soft) backwards; }
 
 @media (prefers-reduced-motion: reduce) {

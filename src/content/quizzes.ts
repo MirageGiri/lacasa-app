@@ -201,6 +201,19 @@ export const quizzes: Record<string, QuizQuestion[]> = {
         es: '1 vaso = 8 oz, aproximadamente media botella de agua.',
       },
     },
+    {
+      id: 'm6q3',
+      prompt: {
+        en: 'How many cups of water a day does a 9-to-13-year-old boy need?',
+        es: '¿Cuántos vasos de agua al día necesita un niño de 9 a 13 años?',
+      },
+      choices: { en: ['2 cups', '4½ cups', '6½ cups'], es: ['2 vasos', '4½ vasos', '6½ vasos'] },
+      answer: 2,
+      explanation: {
+        en: '6½ cups. Girls the same age need 6 cups, and younger children need less.',
+        es: '6½ vasos. Las niñas de la misma edad necesitan 6 vasos, y los más pequeños necesitan menos.',
+      },
+    },
   ],
   m7: [
     {

@@ -1,9 +1,9 @@
 import { useState } from 'react'
-import type { CSSProperties } from 'react'
 import { useLang } from '@/i18n/LanguageContext'
 import { chatProvider } from '@/lib/chatProvider'
 import type { ChatMessage } from '@/lib/chatProvider'
 import { Screen } from '@/components/ui'
+import { BLOCK } from '@/components/blocks'
 import { ChatIcon, ChevronDownIcon } from '@/components/icons'
 
 /** Seeded from the prototype's "Ask a Question" table. Once Supabase is on,
@@ -86,7 +86,7 @@ export default function Ask() {
             <span
               aria-hidden
               className="block3d h-11 w-11"
-              style={{ '--b-hi': '#63AFE6', '--b-face': '#2278BC', '--b-lo': '#1A5F96', '--b-edge': '#113A5A' } as CSSProperties}
+              style={BLOCK.brand}
             >
               <ChatIcon size={22} />
             </span>

@@ -2,12 +2,13 @@ import type { CSSProperties } from 'react'
 import { NavLink, Outlet } from 'react-router-dom'
 import { useLang } from '@/i18n/LanguageContext'
 import { useProgress } from '@/state/ProgressContext'
-import { BookIcon, ChatIcon, PersonIcon, TargetIcon, StoryIcon } from '@/components/icons'
+import { BookIcon, ChatIcon, PersonIcon, SparklesIcon, TargetIcon, StoryIcon } from '@/components/icons'
 import { ProgressFill } from '@/components/ui'
 
 const tabs = [
   { to: '/', key: 'navHome', Icon: BookIcon, end: true },
   { to: '/goals', key: 'navGoals', Icon: TargetIcon, end: false },
+  { to: '/chat', key: 'navChat', Icon: SparklesIcon, end: false },
   { to: '/ask', key: 'navAsk', Icon: ChatIcon, end: false },
   { to: '/profile', key: 'navProfile', Icon: PersonIcon, end: false },
 ] as const
@@ -33,15 +34,15 @@ export default function Layout() {
       </a>
 
       {/* ---------- Desktop sidebar ---------- */}
-      <aside className="fixed inset-y-0 left-0 z-30 hidden w-64 flex-col overflow-hidden bg-gradient-to-b from-brand-800 to-[#0B2A44] text-white lg:flex">
+      <aside className="fixed inset-y-0 left-0 z-30 hidden w-64 flex-col overflow-hidden bg-gradient-to-b from-brand-800 to-brand-950 text-white lg:flex">
         <span aria-hidden className="pointer-events-none absolute -right-24 -top-24 h-64 w-64 rounded-full bg-brand-600/30 blur-2xl" />
-        <span aria-hidden className="pointer-events-none absolute -bottom-24 -left-20 h-64 w-64 rounded-full bg-aqua-500/15 blur-2xl" />
+        <span aria-hidden className="pointer-events-none absolute -bottom-24 -left-20 h-64 w-64 rounded-full bg-sun-500/15 blur-2xl" />
 
         <div className="relative flex items-center gap-3 px-5 pb-6 pt-6">
           <span
             aria-hidden
             className="block3d h-11 w-11 font-display text-xl font-extrabold"
-            style={{ '--b-hi': '#63AFE6', '--b-face': '#2278BC', '--b-lo': '#1A5F96', '--b-edge': '#0B2A44' } as CSSProperties}
+            style={{ '--b-hi': '#F472AE', '--b-face': '#D81B72', '--b-lo': '#C2185B', '--b-edge': '#3E0A24' } as CSSProperties}
           >
             C
           </span>
@@ -68,7 +69,7 @@ export default function Layout() {
                   <>
                     <span
                       aria-hidden
-                      className={`absolute left-0 top-2 bottom-2 w-1 rounded-r-full bg-aqua-500 transition-opacity ${
+                      className={`absolute left-0 top-2 bottom-2 w-1 rounded-r-full bg-brand-300 transition-opacity ${
                         isActive ? 'opacity-100' : 'opacity-0'
                       }`}
                     />

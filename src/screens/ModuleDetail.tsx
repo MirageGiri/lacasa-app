@@ -1,4 +1,4 @@
-import { Link, useParams } from 'react-router-dom'
+import { Link, Navigate, useParams } from 'react-router-dom'
 import { itemsByModule, moduleById, quizzes } from '@/content'
 import { useLang } from '@/i18n/LanguageContext'
 import { useProgress } from '@/state/ProgressContext'
@@ -12,7 +12,7 @@ export default function ModuleDetail() {
   const { isRead, moduleProgress, quizScores } = useProgress()
 
   const mod = moduleById[moduleId]
-  if (!mod) return <Screen title="Not found"><p /></Screen>
+  if (!mod) return <Navigate to="/" replace />
 
   const list = itemsByModule(moduleId)
   const p = moduleProgress(moduleId)

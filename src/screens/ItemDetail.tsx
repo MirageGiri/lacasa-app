@@ -1,5 +1,5 @@
-import { useEffect, useState } from 'react'
-import { Link, useNavigate, useParams } from 'react-router-dom'
+import { useState } from 'react'
+import { Link, Navigate, useNavigate, useParams } from 'react-router-dom'
 import { itemById, itemsByModule, moduleById } from '@/content'
 import type { Block } from '@/content/types'
 import { useLang } from '@/i18n/LanguageContext'
@@ -51,19 +51,28 @@ function BlockView({ block }: { block: Block }) {
   }
 }
 
+/* Keyed by lesson, so moving to another lesson (outline, "next lesson", the
+ * assistant's related-lesson card) mounts a fresh screen at step 1. Resetting
+ * the step in an effect instead rendered one frame of the new lesson at the
+ * old step — "4/2" and an empty card when the new lesson was shorter. */
 export default function ItemDetail() {
+  const { itemId = '' } = useParams()
+  return <Lesson key={itemId} />
+}
+
+function Lesson() {
   const { moduleId = '', itemId = '' } = useParams()
   const navigate = useNavigate()
   const { t, b } = useLang()
   const { isRead, toggleRead, moduleProgress } = useProgress()
   const [step, setStep] = useState(0)
 
-  // A different lesson means a fresh start, not wherever the last one ended.
-  useEffect(() => setStep(0), [itemId])
-
   const item = itemById[itemId]
   const mod = moduleById[moduleId]
-  if (!item || !mod) return null
+  // A stale bookmark or a lesson id under the wrong module used to render a
+  // blank screen (or "Lesson 0"). Send people somewhere useful instead.
+  if (!mod) return <Navigate to="/" replace />
+  if (!item || item.moduleId !== moduleId) return <Navigate to={`/module/${moduleId}`} replace />
 
   const list = itemsByModule(moduleId)
   const idx = list.findIndex((i) => i.id === itemId)
@@ -72,13 +81,20 @@ export default function ItemDetail() {
   const a = accent(mod.accent)
 
   function finish() {
-    if (!isRead(itemId)) toggleRead(itemId)
-    // moduleProgress still reflects pre-click state, so this lesson is the
-    // one that completes the module when every other lesson is already read.
+    const wasRead = isRead(itemId)
+    if (!wasRead) toggleRead(itemId)
+    // moduleProgress and isRead still reflect pre-click state, so this lesson
+    // is the one that completes the module when every other lesson is read.
     const p = moduleProgress(moduleId)
-    const completesModule = !isRead(itemId) && p.read === p.total - 1
-    if (completesModule) navigate(`/module/${moduleId}/done`)
-    else navigate('/')
+    if (!wasRead && p.read === p.total - 1) {
+      navigate(`/module/${moduleId}/done`)
+      return
+    }
+    // Otherwise keep the family in the module: the next unread lesson after
+    // this one (wrapping round), rather than dropping them back on the
+    // dashboard after every lesson.
+    const after = [...list.slice(idx + 1), ...list.slice(0, idx)].find((i) => !isRead(i.id))
+    navigate(after ? `/module/${moduleId}/item/${after.id}` : `/module/${moduleId}`)
   }
 
   return (

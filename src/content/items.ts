@@ -668,24 +668,32 @@ export const items: Item[] = [
   {
     id: 'i21',
     moduleId: 'm5',
-    title: { en: 'Setting goals', es: 'Poner metas' },
+    title: { en: 'Setting goals: drink more water', es: 'Poner metas: tomar más agua' },
     summary: {
-      en: 'Choose one sugar goal for this week.',
-      es: 'Elija una meta de azúcar para esta semana.',
+      en: 'Daily water goals for the whole family.',
+      es: 'Metas diarias de agua para toda la familia.',
     },
-    needsSourceCopy: true,
     body: [
+      {
+        kind: 'p',
+        text: { en: 'Children aged 7 to 12:', es: 'Niños de 7 a 12 años:' },
+      },
       {
         kind: 'ul',
         items: {
-          en: ['Drink more water'],
-          es: ['Tomar más agua'],
+          en: ['Boys: 8 to 10 cups of water per day', 'Girls: 8 to 9 cups of water per day'],
+          es: ['Niños: de 8 a 10 vasos de agua al día', 'Niñas: de 8 a 9 vasos de agua al día'],
+        },
+      },
+      {
+        kind: 'ul',
+        items: {
+          en: ['Men: 15 cups per day', 'Women: 11 cups per day'],
+          es: ['Hombres: 15 vasos al día', 'Mujeres: 11 vasos al día'],
         },
       },
     ],
   },
-
-  // ── Module 6 · Importance of Hydration ───────────────────────────────────
   {
     id: 'i22',
     moduleId: 'm6',
@@ -714,15 +722,25 @@ export const items: Item[] = [
     moduleId: 'm6',
     title: { en: 'The benefits of drinking water', es: 'Los beneficios de tomar agua' },
     summary: {
-      en: 'Temperature, joints and skin.',
-      es: 'Temperatura, articulaciones y piel.',
+      en: 'Temperature, joints, skin and kidneys.',
+      es: 'Temperatura, articulaciones, piel y riñones.',
     },
     body: [
       {
-        kind: 'p',
-        text: {
-          en: 'It maintains body temperature, protects the joints and keeps skin beautiful.',
-          es: 'Mantiene la temperatura del cuerpo, protege las articulaciones y mantiene la piel bonita.',
+        kind: 'ul',
+        items: {
+          en: [
+            'Maintains body temperature',
+            'Protects the joints',
+            'Keeps skin healthy',
+            'Helps the kidneys work properly and clears out what the body does not need',
+          ],
+          es: [
+            'Mantiene la temperatura del cuerpo',
+            'Protege las articulaciones',
+            'Mantiene la piel sana',
+            'Ayuda al buen funcionamiento de los riñones y elimina lo que el cuerpo no necesita',
+          ],
         },
       },
     ],
@@ -735,12 +753,26 @@ export const items: Item[] = [
       es: '¿Qué pasa si no tomamos agua?',
     },
     summary: {
-      en: 'The signs of not drinking enough.',
-      es: 'Las señales de no tomar suficiente.',
+      en: 'From headaches to serious problems.',
+      es: 'Desde dolores de cabeza hasta problemas graves.',
     },
-    needsSourceCopy: true,
     body: [
-      { kind: 'p', text: { en: 'We have:', es: 'Tenemos:' } },
+      { kind: 'p', text: { en: 'We can have:', es: 'Podemos tener:' } },
+      {
+        kind: 'ul',
+        items: {
+          en: ['Headache', 'Dizziness', 'Mood changes', 'Confusion'],
+          es: ['Dolor de cabeza', 'Mareos', 'Cambios de ánimo', 'Confusión'],
+        },
+      },
+      {
+        kind: 'callout',
+        tone: 'warn',
+        text: {
+          en: 'And serious problems such as kidney failure and heart problems.',
+          es: 'Y problemas graves como insuficiencia renal y problemas del corazón.',
+        },
+      },
     ],
   },
   {
@@ -751,14 +783,24 @@ export const items: Item[] = [
       es: '¿Cuándo necesitamos tomar más agua?',
     },
     summary: {
-      en: 'The days your family needs extra.',
-      es: 'Los días en que su familia necesita más.',
+      en: 'Hot days, sports and sick days.',
+      es: 'Días calurosos, deporte y días de enfermedad.',
     },
-    needsSourceCopy: true,
     body: [
       {
         kind: 'ul',
-        items: { en: ['Hot and sunny days'], es: ['Días calurosos y soleados'] },
+        items: {
+          en: [
+            'On hot and sunny days',
+            'When you play sports or spend time outdoors',
+            'When we are sick, with a cold or the flu',
+          ],
+          es: [
+            'En días calurosos y soleados',
+            'Cuando hace deporte o pasa tiempo al aire libre',
+            'Cuando estamos enfermos, con catarro o gripe',
+          ],
+        },
       },
     ],
   },
@@ -770,13 +812,28 @@ export const items: Item[] = [
       en: 'Make water the easy choice at home.',
       es: 'Haga que el agua sea la opción fácil en casa.',
     },
-    needsSourceCopy: true,
     body: [
       {
         kind: 'ul',
         items: {
-          en: ['Keep water in the refrigerator'],
-          es: ['Tenga agua en el refrigerador'],
+          en: [
+            'Keep water in the refrigerator',
+            'Drink water with your meals',
+            'Always carry a bottle of water with you',
+          ],
+          es: [
+            'Tenga agua en el refrigerador',
+            'Tome agua con sus comidas',
+            'Lleve siempre una botella de agua con usted',
+          ],
+        },
+      },
+      {
+        kind: 'callout',
+        tone: 'good',
+        text: {
+          en: 'Add flavor! Make aguas frescas, or add slices of lemon, cucumber, orange, blackberry, strawberry, pineapple, watermelon or mango.',
+          es: '¡Dele sabor! Prepare aguas frescas, o agregue rodajas de limón, pepino, naranja, mora, fresa, piña, sandía o mango.',
         },
       },
     ],
@@ -786,24 +843,48 @@ export const items: Item[] = [
     moduleId: 'm6',
     title: { en: 'How much water do we need?', es: '¿Cuánta agua necesitamos?' },
     summary: {
-      en: 'Daily amounts by age.',
-      es: 'Cantidades diarias por edad.',
+      en: 'Daily cups of drinking water, by age.',
+      es: 'Vasos de agua al día, según la edad.',
     },
-    needsSourceCopy: true,
     body: [
       {
-        kind: 'stat',
-        value: '1 cup = 8 oz',
-        label: {
-          en: 'about half a water bottle',
-          es: 'aproximadamente media botella de agua',
+        kind: 'ul',
+        items: {
+          en: ['1 cup = 8 oz = half a bottle of water', '2 cups = 16.9 oz = one bottle of water'],
+          es: ['1 vaso = 8 oz = media botella de agua', '2 vasos = 16.9 oz = una botella de agua'],
         },
+      },
+      {
+        kind: 'p',
+        text: { en: 'Boys', es: 'Niños' },
       },
       {
         kind: 'ul',
         items: {
-          en: ['Boys aged 4 to 8:', 'Girls aged 4 to 8:', 'Men aged 14 and over:'],
-          es: ['Niños de 4 a 8 años:', 'Niñas de 4 a 8 años:', 'Hombres de 14 años en adelante:'],
+          en: ['4 to 8 years old: 4½ cups of water', '9 to 13 years old: 6½ cups of water'],
+          es: ['De 4 a 8 años: 4½ vasos de agua', 'De 9 a 13 años: 6½ vasos de agua'],
+        },
+      },
+      {
+        kind: 'p',
+        text: { en: 'Girls', es: 'Niñas' },
+      },
+      {
+        kind: 'ul',
+        items: {
+          en: ['4 to 8 years old: 4 cups of water', '9 to 13 years old: 6 cups of water'],
+          es: ['De 4 a 8 años: 4 vasos de agua', 'De 9 a 13 años: 6 vasos de agua'],
+        },
+      },
+      {
+        kind: 'p',
+        text: { en: 'Adults, 14 and over', es: 'Adultos, de 14 años en adelante' },
+      },
+      {
+        kind: 'ul',
+        items: {
+          en: ['Men: 8 cups of water', 'Women: 6½ cups of water'],
+          es: ['Hombres: 8 vasos de agua', 'Mujeres: 6½ vasos de agua'],
         },
       },
     ],
@@ -816,19 +897,24 @@ export const items: Item[] = [
       en: 'Start and end the day with a cup of water.',
       es: 'Empiece y termine el día con un vaso de agua.',
     },
-    needsSourceCopy: true,
     body: [
       {
         kind: 'ul',
         items: {
-          en: ['Start and end the day with a cup of water'],
-          es: ['Empezar y terminar el día con un vaso de agua'],
+          en: [
+            'Start and end the day with a cup of water',
+            'Set a goal such as drinking 8 cups of water a day',
+            'Set reminders to drink water',
+          ],
+          es: [
+            'Empezar y terminar el día con un vaso de agua',
+            'Ponerse una meta como tomar 8 vasos de agua al día',
+            'Poner recordatorios para tomar agua',
+          ],
         },
       },
     ],
   },
-
-  // ── Module 7 · Physical Activity ─────────────────────────────────────────
   {
     id: 'i29',
     moduleId: 'm7',

@@ -1,12 +1,19 @@
 import { useState } from 'react'
-import { useNavigate, useParams } from 'react-router-dom'
+import { Navigate, useNavigate, useParams } from 'react-router-dom'
 import { moduleById, quizzes } from '@/content'
 import { useLang } from '@/i18n/LanguageContext'
 import { useProgress } from '@/state/ProgressContext'
 import { BackLink, Screen } from '@/components/ui'
 import { AwardIcon, CheckIcon, TargetIcon, XIcon } from '@/components/icons'
 
+/* Keyed by module so a quiz never inherits another module's question index
+ * or score. */
 export default function Quiz() {
+  const { moduleId = '' } = useParams()
+  return <ModuleQuiz key={moduleId} />
+}
+
+function ModuleQuiz() {
   const { moduleId = '' } = useParams()
   const navigate = useNavigate()
   const { t, b, bl } = useLang()
@@ -20,7 +27,7 @@ export default function Quiz() {
   const [correct, setCorrect] = useState(0)
   const [finished, setFinished] = useState(false)
 
-  if (!mod || questions.length === 0) return <Screen title="Not found"><p /></Screen>
+  if (!mod || questions.length === 0) return <Navigate to={mod ? `/module/${moduleId}` : '/'} replace />
 
   const q = questions[index]
   const answered = picked !== null
@@ -118,6 +125,9 @@ export default function Quiz() {
         })}
       </div>
 
+      {/* Always mounted, so screen readers announce the verdict when it
+          appears — a live region added at the same moment is often missed. */}
+      <div aria-live="polite">
       {answered && (
         <div className="mt-5">
           <p className={`text-base font-extrabold ${isRight ? 'text-leaf-600' : 'text-brand-700'}`}>
@@ -132,6 +142,7 @@ export default function Quiz() {
           </button>
         </div>
       )}
+      </div>
     </Screen>
   )
 }

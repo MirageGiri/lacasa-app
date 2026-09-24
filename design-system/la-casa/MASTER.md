@@ -15,8 +15,8 @@
 > (`"healthcare app" --design-system`) and then reconciled with the app as built.
 > Where the generator and the project disagreed, the project won:
 > - **Palette:** the generator proposed cyan `#0891B2` with *black* on-primary text.
->   The project keeps its stakeholder-approved light-blue ramp (see table below);
->   the generator's intent — calm blue + health green — is the same.
+>   The project uses LA CASA's own pink (magenta) ramp instead — restored 2026-09-23
+>   at the LA CASA team's request after a light-blue trial (see table below).
 > - **Page pattern:** the generator returned a marketing landing pattern
 >   (hero / testimonials / CTA). This is an installed app, not a landing page, so
 >   that section is replaced with the app-shell pattern actually in use.
@@ -59,23 +59,23 @@ surface they sit on.
 
 | Role | Token | Hex | Notes |
 |------|-------|-----|-------|
-| Primary (fill) | `brand-600` | `#2278BC` | White text 4.7:1 — buttons, header, active states |
-| Primary (text on white) | `brand-700` | `#1A5F96` | 6.7:1 — links, emphasis |
-| Primary tint | `brand-50` / `brand-100` | `#F2F8FE` / `#E1F0FC` | Backgrounds only; never text below `-700` on these |
+| Primary (fill) | `brand-600` | `#C2185B` | White text 5.9:1 — buttons, header, active states |
+| Primary (text on white) | `brand-700` | `#9D174D` | 7.9:1 — links, emphasis |
+| Primary tint | `brand-50` / `brand-100` | `#FDF2F7` / `#FCE7F1` | Backgrounds only; never text below `-700` on these |
 | Health green (fill) | `leaf-600` | `#1F7A44` | White text 5.4:1 — "done" states |
-| Background | `canvas` | `#F4FAFF` | Page ground |
+| Background | `canvas` | `#FFF7FA` | Page ground |
 | Card | `surface` | `#FFFFFF` | |
-| Foreground | `ink` | `#10202E` | |
-| Muted foreground | `ink-soft` | `#4A6172` | 6.5:1 on white — secondary text |
-| Divider | `line` | `#DBEAF7` | 1.2:1 — decorative dividers only |
-| Control border | `line-strong` | `#7893A8` | 3.2:1 — inputs and control boundaries (WCAG 1.4.11) |
+| Foreground | `ink` | `#1A1220` | |
+| Muted foreground | `ink-soft` | `#5C4A57` | 8.1:1 on white — secondary text |
+| Divider | `line` | `#F1E1EA` | 1.2:1 — decorative dividers only |
+| Control border | `line-strong` | `#8E7A88` | 4.0:1 — inputs and control boundaries (WCAG 1.4.11) |
 | Destructive | `danger-600` | `#B91C1C` | 6.5:1; always paired with an icon or words |
-| Ring / focus | `brand-500` | `#3593D8` | 3px outline, 2px offset |
+| Ring / focus | `brand-500` | `#E0218A` | 3px outline, 2px offset |
 
-**Module accents** (`leaf`, `sun`, `berry`, `aqua`) each have: `-100` tint, `-500`
+**Module accents** (`leaf`, `sun`, `coral`, `plum`, `aqua`; `berry` is decorative only — too close to the pink brand) each have: `-100` tint, `-500`
 mark (bars and dots only — never under text), `-800` text on the tint, and a
 `solid` fill used under white text or icons: `leaf-600`, `sun-700` (`#9C6400`,
-5.0:1), `berry-600`, `aqua-600`. Use `accent(x).solid` from `components/ui.tsx`,
+5.0:1), `coral-600` (5.2:1), `plum-600` (5.7:1), `aqua-600`. Use `accent(x).solid` from `components/ui.tsx`,
 never `accent(x).bar`, for any filled button or badge.
 
 **Storybook paper** (`paper`, `paper-art`, `paper-line`, `paper-ink`, `paper-soft`,

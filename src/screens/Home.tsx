@@ -202,7 +202,7 @@ export default function Home() {
           style={rise(0)}
         >
           <span aria-hidden className="pointer-events-none absolute -left-24 -top-32 h-80 w-80 rounded-full bg-brand-400/30 blur-3xl" />
-          <span aria-hidden className="pointer-events-none absolute -bottom-40 right-10 h-80 w-80 rounded-full bg-aqua-500/25 blur-3xl" />
+          <span aria-hidden className="pointer-events-none absolute -bottom-40 right-10 h-80 w-80 rounded-full bg-sun-500/25 blur-3xl" />
 
           <div className="relative grid items-center gap-2 md:grid-cols-[1fr_minmax(260px,330px)]">
             <div className="px-6 pb-6 pt-6 md:py-8 md:pl-8 md:pr-2">
@@ -242,9 +242,9 @@ export default function Home() {
         </section>
 
         {/* ---------- Stats ---------- */}
-        <div className="grid gap-4 sm:grid-cols-2 lg:gap-5 xl:col-span-4 xl:grid-cols-1">
+        <div className="grid min-w-0 gap-4 sm:grid-cols-2 lg:gap-5 xl:col-span-4 xl:grid-cols-1">
           <section
-            className="lc-rise flex items-center gap-5 rounded-card border border-line bg-surface p-5 shadow-[var(--shadow-e2)]"
+            className="lc-rise flex min-w-0 items-center gap-5 rounded-card border border-line bg-surface p-5 shadow-[var(--shadow-e2)]"
             style={rise(1)}
           >
             <ProgressRing pct={overall.pct} size={104} label={`${overall.pct}%`} />
@@ -262,7 +262,7 @@ export default function Home() {
           </section>
 
           <section
-            className="lc-rise flex flex-col rounded-card border border-line bg-surface p-5 shadow-[var(--shadow-e2)]"
+            className="lc-rise flex min-w-0 flex-col rounded-card border border-line bg-surface p-5 shadow-[var(--shadow-e2)]"
             style={rise(2)}
           >
             <div className="flex items-center gap-3">

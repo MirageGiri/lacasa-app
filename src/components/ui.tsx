@@ -6,13 +6,15 @@ import { ChevronLeftIcon } from '@/components/icons'
 /* `bar` is a mark: progress fills, dots, tints. It is NOT a background for
  * text — white on sun-500 is 2.1:1 and on leaf-500 3.4:1. Anything with white
  * text or a white icon on it uses `solid`, which clears 4.5:1 for every
- * accent (brand 4.7, leaf 5.4, sun 5.0, berry 6.4, aqua 4.8). */
+ * accent (brand 5.9, leaf 5.4, sun 5.0, berry 6.4, aqua 4.8, coral 5.2, plum 5.7). */
 const ACCENTS = {
   brand: { bg: 'bg-brand-100', text: 'text-brand-700', bar: 'bg-brand-500', solid: 'bg-brand-600', ring: 'ring-brand-200' },
   leaf:  { bg: 'bg-leaf-100',  text: 'text-leaf-800',  bar: 'bg-leaf-500',  solid: 'bg-leaf-600',  ring: 'ring-leaf-100' },
   sun:   { bg: 'bg-sun-100',   text: 'text-sun-800',   bar: 'bg-sun-500',   solid: 'bg-sun-700',   ring: 'ring-sun-100' },
   berry: { bg: 'bg-berry-100', text: 'text-berry-800', bar: 'bg-berry-500', solid: 'bg-berry-600', ring: 'ring-berry-100' },
   aqua:  { bg: 'bg-aqua-100',  text: 'text-aqua-800',  bar: 'bg-aqua-500',  solid: 'bg-aqua-600',  ring: 'ring-aqua-100' },
+  coral: { bg: 'bg-coral-100', text: 'text-coral-800', bar: 'bg-coral-500', solid: 'bg-coral-600', ring: 'ring-coral-100' },
+  plum:  { bg: 'bg-plum-100',  text: 'text-plum-800',  bar: 'bg-plum-500',  solid: 'bg-plum-600',  ring: 'ring-plum-100' },
 } as const
 
 export type Accent = keyof typeof ACCENTS

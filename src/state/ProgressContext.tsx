@@ -20,6 +20,28 @@ export interface ProgressState {
 
 const empty: ProgressState = { readItemIds: [], quizScores: {}, goals: [] }
 
+/* Whatever is in device storage was written by some earlier build. A field
+ * that did not exist then, or a hand-cleared value, used to reach the screens
+ * as `undefined` and crash them (`goals.map`). Fill every gap with its empty
+ * value instead. */
+function normalize(raw: unknown): ProgressState {
+  const r = (raw && typeof raw === 'object' ? raw : {}) as Partial<ProgressState>
+  return {
+    readItemIds: Array.isArray(r.readItemIds) ? r.readItemIds.filter((x) => typeof x === 'string') : [],
+    quizScores: r.quizScores && typeof r.quizScores === 'object' ? r.quizScores : {},
+    goals: Array.isArray(r.goals)
+      ? r.goals
+          .filter((g) => g && typeof g.goalId === 'string')
+          .map((g) => ({ ...g, checkIns: Array.isArray(g.checkIns) ? g.checkIns : [] }))
+      : [],
+  }
+}
+
+/* Lesson ids that exist in this build. Stored ids for lessons that were
+ * merged or removed stay in storage (a later build may bring them back) but
+ * are not counted — otherwise "30 of 29 read" and 103%. */
+const knownItemIds = new Set(items.map((i) => i.id))
+
 interface ProgressValue extends ProgressState {
   isRead: (itemId: string) => boolean
   toggleRead: (itemId: string) => void
@@ -38,7 +60,7 @@ interface ProgressValue extends ProgressState {
 const Ctx = createContext<ProgressValue | null>(null)
 
 export function ProgressProvider({ children }: { children: ReactNode }) {
-  const [state, setState] = useState<ProgressState>(() => load(KEY, empty))
+  const [state, setState] = useState<ProgressState>(() => normalize(load<unknown>(KEY, empty)))
 
   useEffect(() => {
     save(KEY, state)
@@ -73,7 +95,7 @@ export function ProgressProvider({ children }: { children: ReactNode }) {
       const list = itemsByModule(m.id)
       return list.length > 0 && list.every((i) => state.readItemIds.includes(i.id))
     }).length
-    const itemsRead = state.readItemIds.length
+    const itemsRead = state.readItemIds.filter((id) => knownItemIds.has(id)).length
     return {
       modulesDone,
       totalModules: modules.length,

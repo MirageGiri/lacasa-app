@@ -54,7 +54,7 @@ export interface Module {
   title: Bilingual
   blurb: Bilingual
   /** Tailwind-ish accent token used for the module's card and header. */
-  accent: 'brand' | 'leaf' | 'sun' | 'berry' | 'aqua'
+  accent: 'brand' | 'leaf' | 'sun' | 'berry' | 'aqua' | 'coral' | 'plum'
   /** Named SVG icon — emoji render differently on every Android version. */
   icon: ModuleIconName
 }

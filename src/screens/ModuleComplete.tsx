@@ -1,4 +1,4 @@
-import { Link, useParams } from 'react-router-dom'
+import { Link, Navigate, useParams } from 'react-router-dom'
 import { itemsByModule, moduleById, quizzes } from '@/content'
 import { useLang } from '@/i18n/LanguageContext'
 import { useProgress } from '@/state/ProgressContext'
@@ -14,7 +14,7 @@ const CONFETTI = Array.from({ length: 26 }, (_, i) => ({
   delay: (i % 9) * 0.18,
   duration: 2.6 + (i % 5) * 0.35,
   size: 7 + (i % 4) * 3,
-  color: ['#2278BC', '#2E9E5B', '#F0A202', '#D6337F', '#0E9BB5'][i % 5],
+  color: ['#C2185B', '#2E9E5B', '#F0A202', '#8B5CF6', '#0E9BB5'][i % 5],
   round: i % 3 === 0,
 }))
 
@@ -24,7 +24,7 @@ export default function ModuleComplete() {
   const { overall } = useProgress()
 
   const mod = moduleById[moduleId]
-  if (!mod) return null
+  if (!mod) return <Navigate to="/" replace />
 
   const count = itemsByModule(moduleId).length
   const a = accent(mod.accent)

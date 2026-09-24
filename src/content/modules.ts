@@ -27,7 +27,7 @@ export const modules: Module[] = [
     id: 'm3',
     order: 3,
     icon: 'utensils',
-    accent: 'berry',
+    accent: 'coral',
     title: { en: 'Food Servings', es: 'Porciones de alimentos' },
     blurb: {
       en: 'How to build a balanced plate at every meal.',
@@ -49,7 +49,7 @@ export const modules: Module[] = [
     id: 'm5',
     order: 5,
     icon: 'cupSoda',
-    accent: 'berry',
+    accent: 'plum',
     title: { en: 'Sugar Smart', es: 'Azúcar inteligente' },
     blurb: {
       en: 'Reading labels, spotting hidden sugar, and cutting back on sugary drinks.',

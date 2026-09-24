@@ -3,6 +3,7 @@ import type { CSSProperties, ReactNode, PointerEvent } from 'react'
 import { ModuleIcon } from '@/components/icons'
 import type { ModuleIconName } from '@/components/icons'
 import type { Accent } from '@/components/ui'
+import { BLOCK } from '@/components/blocks'
 
 /* The 3D layer for the web layout. Pure CSS transforms driven by pointer
  * position — no WebGL, no dependencies, nothing to download. Tilt only runs
@@ -46,15 +47,6 @@ export function useTilt<T extends HTMLElement>(max = 7) {
   return { ref, onPointerMove, onPointerLeave }
 }
 
-/** Colors for a clay block, per module accent. The face runs light-to-dark
- *  so it reads as lit from above; the edge is the extrusion underneath. */
-const BLOCK: Record<Accent, CSSProperties> = {
-  brand: { '--b-hi': '#63AFE6', '--b-face': '#2278BC', '--b-lo': '#1A5F96', '--b-edge': '#113A5A' } as CSSProperties,
-  leaf:  { '--b-hi': '#4CC47E', '--b-face': '#2E9E5B', '--b-lo': '#1F7A44', '--b-edge': '#10603A' } as CSSProperties,
-  sun:   { '--b-hi': '#FFC23D', '--b-face': '#F0A202', '--b-lo': '#C77F00', '--b-edge': '#8A5A00' } as CSSProperties,
-  berry: { '--b-hi': '#EB5C9E', '--b-face': '#D6337F', '--b-lo': '#B02566', '--b-edge': '#7E1A49' } as CSSProperties,
-  aqua:  { '--b-hi': '#3CC3DB', '--b-face': '#0E9BB5', '--b-lo': '#0B7D93', '--b-edge': '#075A6B' } as CSSProperties,
-}
 
 /** A module's icon as a 3D clay tile. Decorative: always sits beside the
  *  module's written title, so it is hidden from assistive tech. */
@@ -108,7 +100,7 @@ export function TiltSurface({
 }
 
 const FLOATERS: { icon: ModuleIconName; accent: Accent; x: string; y: string; size: number; delay: number }[] = [
-  { icon: 'apple',    accent: 'berry', x: '16%', y: '14%', size: 56, delay: 0 },
+  { icon: 'apple',    accent: 'plum',  x: '16%', y: '14%', size: 56, delay: 0 },
   { icon: 'droplet',  accent: 'aqua',  x: '64%', y: '6%',  size: 50, delay: -1.6 },
   { icon: 'salad',    accent: 'leaf',  x: '70%', y: '60%', size: 56, delay: -3.1 },
   { icon: 'activity', accent: 'sun',   x: '4%',  y: '64%', size: 48, delay: -4.4 },
@@ -189,7 +181,7 @@ export function ProgressRing({ pct, size = 112, label }: { pct: number; size?: n
         />
         <defs>
           <linearGradient id="lc-ring" x1="0" x2="1" y1="0" y2="1">
-            <stop offset="0%" stopColor="#3593D8" />
+            <stop offset="0%" stopColor="#E0218A" />
             <stop offset="100%" stopColor="#1F7A44" />
           </linearGradient>
         </defs>

@@ -6,6 +6,7 @@
    No screen code changes.
 --------------------------------------------------------------------------- */
 import type { Lang } from '@/i18n/strings'
+import { demoReply } from '@/lib/demoAssistant'
 
 export interface ChatMessage {
   id: string
@@ -17,7 +18,7 @@ export interface ChatMessage {
 }
 
 export interface ChatProvider {
-  readonly kind: 'staff-queue' | 'llm'
+  readonly kind: 'staff-queue' | 'demo' | 'llm'
   list(): Promise<ChatMessage[]>
   send(text: string, lang: Lang): Promise<ChatMessage[]>
 }
@@ -59,4 +60,31 @@ export const staffQueueProvider: ChatProvider = {
  * system prompt, never in the client.
  */
 
+/** Ask page: questions go to the LA CASA team. */
 export const chatProvider: ChatProvider = staffQueueProvider
+
+/** Assistant page, until the Azure OpenAI edge function exists: answers are
+ *  lifted from the lessons by `demoAssistant.ts`. Replace with `llmProvider`
+ *  (sketched above) — the Assistant screen only knows this interface. */
+export const demoAssistantProvider: ChatProvider = {
+  kind: 'demo',
+  async list() {
+    return []
+  },
+  async send(text, lang) {
+    const now = new Date().toISOString()
+    const reply = demoReply(text, lang)
+    return [
+      { id: crypto.randomUUID(), role: 'user', text, createdAt: now },
+      {
+        id: crypto.randomUUID(),
+        role: 'assistant',
+        text: reply.text,
+        createdAt: now,
+        sourceItemIds: reply.sourceItemIds,
+      },
+    ]
+  },
+}
+
+export const assistantProvider: ChatProvider = demoAssistantProvider

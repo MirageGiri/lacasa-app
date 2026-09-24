@@ -26,7 +26,7 @@ export default function Storybook() {
               </div>
               <p className="text-sm text-ink-soft">{b(story.blurb)}</p>
               <p className="text-xs font-bold text-ink-soft">
-                {story.pages.length} {t('storyPage').toLowerCase()}s
+                {story.pages.length} {story.pages.length === 1 ? t('storyPage').toLowerCase() : t('storyPages')}
               </p>
             </div>
           </Link>
